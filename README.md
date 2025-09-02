@@ -1,5 +1,4 @@
-# Pemrograman Mobile Semester 5
+# Pemrograman Mobile - Semester 5
 
-Nama : Ahmad Naufal Ilham
-NIM  : 2341720047
-
+**Nama  :** Ahmad Naufal Ilham  
+**NIM   :** 2341720047
