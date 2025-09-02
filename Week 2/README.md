@@ -1,16 +1,19 @@
+# **PEMROGRAMAN DART - WEEK 2 - PRAKTIKUM**
+
 # **Soal 1**
 ## **Modifikasilah kode pada baris 3 di VS Code atau Editor Code favorit Anda berikut ini agar mendapatkan keluaran (output) sesuai yang diminta!**
 
+```dart
 void main(){
   for (int i = 0; i < 10>; i++) {
     print('hello ${i + 2}');
   }
 }
-
+```
 ![](img/image1.png)
 
 ## **Output yang diminta (Gantilah Fulan dengan nama Anda):**
-
+```dart
 Nama Saya adalah Fulan Sekarang berumur 18
 Nama Saya adalah Fulan Sekarang berumur 17
 Nama Saya adalah Fulan Sekarang berumur 16
@@ -21,15 +24,17 @@ Nama Saya adalah Fulan Sekarang berumur 12
 Nama Saya adalah Fulan Sekarang berumur 11
 Nama Saya adalah Fulan Sekarang berumur 10
 Nama Saya adalah Fulan Sekarang berumur 9
-
+```
 ## **Jawaban**
 
+```dart
 void main(){
   hello();
   for (int i = 18; i >8; i--) {
     print('Nama Saya adalah Naufal Sekarang Berumur ${i}');
   }
 }
+```
 
 ![](img/image2.png)
 
@@ -94,6 +99,7 @@ Null Safety adalah fitur Dart untuk mencegah error karena variabel bernilai null
 
 Contoh Null Safety
 
+```dart
 void main() {
   String? nama;                 // deklarasi nullable (bisa null / string)
   nama = "Ahmad Naufal ";       // sekarang diisi string
@@ -102,7 +108,7 @@ void main() {
   nama = null;                  // juga boleh null
   print("Nama sekarang: $nama");
 }
-
+```
 Output
 
 ![](img/image3.png)
@@ -112,6 +118,7 @@ Late dipakai kalau kita ingin menunda inisialisasi variabel non-nullable sampai 
 
 Contoh Late Variable
 
+```dart
 void main() {
   late String message;
 
@@ -122,6 +129,7 @@ void main() {
   message = "Hello Naufal!";
   print(message); // Hello Naufal!
 }
+```
 
 Output
 
