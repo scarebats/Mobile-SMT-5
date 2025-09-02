@@ -1,5 +1,8 @@
 # **PEMROGRAMAN DART - WEEK 2 - PRAKTIKUM**
 
+Nama  : Ahmad Naufal Ilham  
+NIM   : 2341720047
+
 # **Soal 1**
 ## **Modifikasilah kode pada baris 3 di VS Code atau Editor Code favorit Anda berikut ini agar mendapatkan keluaran (output) sesuai yang diminta!**
 
