@@ -18,3 +18,4 @@ bool prima(int n) {
   }
   return true;
 }
+

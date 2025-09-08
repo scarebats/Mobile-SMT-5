@@ -29,7 +29,7 @@ Langkah 2
 Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan!
 
 Output
-![](img/image1.png)
+![](img/image6.png)
 
 String test = "test2";
 → variabel test berisi teks "test2".
@@ -52,7 +52,7 @@ Langkah 3
 ```
 
 Output
-![](img/image2.png)
+![](img/image1.png)
 
 Karena sebelumnya String sehingga terjadi error sehingga harus diubah tipe datanya menjadi boolean agar sesuai
 
@@ -69,7 +69,7 @@ void main() {
 ```
 
 Output
-![](img/image3.png)
+![](img/image2.png)
 
 Langkah 2
 Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan! Lalu perbaiki jika terjadi error.
@@ -92,7 +92,7 @@ void main() {
 ```
 
 Output
-![](img/image4.png)
+![](img/image3.png)
 
 do { ... } while (kondisi); → berbeda dengan while, blok do selalu dijalankan minimal sekali, baru dicek kondisinya.
 counter dimulai dari 0.
@@ -114,7 +114,7 @@ void main() {
 }
 
 Output
-![](img/image5.png)
+![](img/image4.png)
 
 Penjelasan
 for (int index = 10; index < 27; index++)
@@ -159,5 +159,5 @@ bool prima(int n) {
 ```
 
 Output
-![](img/image6.png)
+![](img/image5.png)
 
