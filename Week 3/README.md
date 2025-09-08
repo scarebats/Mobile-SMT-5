@@ -7,7 +7,7 @@
 # Soal 1
 ## Silakan selesaikan Praktikum 1 sampai 3, lalu dokumentasikan berupa screenshot hasil pekerjaan beserta penjelasannya!
 
-### Praktikum 1 : Menerapkan Control Flows ("if/else")
+## Praktikum 1 : Menerapkan Control Flows ("if/else")
 **Langkah 1**
 
 ```dart
