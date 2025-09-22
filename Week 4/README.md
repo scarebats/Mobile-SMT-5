@@ -26,6 +26,7 @@ print(list[1]);
 Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan!
 
 Output
+
 ![](img/image1.png)
 
 ``` dart
@@ -52,6 +53,7 @@ void main() {
 ```
 
 Output
+
 ![](img/image2.png)
 
 1. List<String?>.filled(5, null)
@@ -87,6 +89,7 @@ void main() {
 
 **Langkah 2**
 Output
+
 ![](img/image3.png)
 
 1. Deklarasi set
@@ -136,6 +139,7 @@ void main() {
 ```
 
 Output
+
 ![](img/image4.png)
 
 Penjelasan
@@ -207,6 +211,7 @@ void main() {
 ```
 
 Output
+
 ![](img/image5.png)
 
 Penjelasan
@@ -264,6 +269,7 @@ void main() {
 }
 ```
 Output
+
 ![](img/image6.png)
 
 Penjelasan
@@ -329,6 +335,7 @@ void main() {
 ``` 
 
 Output
+
 ![](img/image7.png)
 
 **Langkah 3**
@@ -354,6 +361,7 @@ print("listWithNIM: $listWithNIM");
 ```
 
 Output
+
 ![](img/image8.png)
 
 **Langkah 4**
@@ -377,6 +385,7 @@ print("nav: $navFalse");
 ```
 
 Output
+
 ![](img/image9.png)
 
 **Langkah 5**
@@ -416,6 +425,7 @@ print("nav (login='Admin'): $navAdmin");
 ```
 
 Output
+
 ![](img/image10.png)
 
 **Langkah 6**
@@ -427,6 +437,7 @@ print(listOfStrings);
 ```
 
 Output
+
 ![](img/image11.png)
 
 Penjelasan
@@ -457,6 +468,7 @@ void main() {
 ```
 
 Output
+
 ![](img/image12.png)
 
 Penjelasan
@@ -479,6 +491,7 @@ void main() {
 ```
 
 Output
+
 ![](img/image13.png)
 
 **Langkah 4**
@@ -494,6 +507,7 @@ print("Mahasiswa: $mahasiswa");
 ```
 
 Output
+
 ![](img/image14.png)
 
 **Langkah 5**
@@ -520,6 +534,7 @@ var mahasiswa2 = ('Ahmad Naufal Ilham', a: 2341720047, b: true, 'Politeknik Nege
 ```
 
 Output
+
 ![](img/image15.png)
 
 # Soal 2
