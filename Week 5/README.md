@@ -24,7 +24,11 @@ Jika sudah selesai proses pembuatan project baru, pastikan tampilan seperti beri
 
 
 ## Praktikum 2 : Menghubungkan Perangkat Android atau Emulator
+Melanjutkan dari praktikum 1, Anda diminta untuk menjalankan aplikasi ke perangkat fisik (device Android atau iOS). Silakan ikuti langkah-langkah pada codelab tautan berikut ini.
+
 https://developer.android.com/codelabs/basic-android-kotlin-compose-connect-device?hl=id#0
+
+
 
 ## Praktikum 3 : Membuat Repository GitHub dan Laporan Praktikum
 **Langkah 1**
