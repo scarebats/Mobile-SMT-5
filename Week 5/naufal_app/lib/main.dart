@@ -59,10 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (selectedIndex) {
       case 0:
         page = GeneratorPage();
-        break;
       case 1:
         page = FavoritesPage();
-        break;
       case 2:
         page = Center(child: Text("Ahmad Naufal Ilham| 2341720047 | TI-3G"));
       default:
