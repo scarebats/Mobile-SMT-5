@@ -1,4 +1,4 @@
-# PEMROGRAMAN DART - WEEK 6 - PRAKTIKUM*
+# PEMROGRAMAN DART - WEEK 6 - PRAKTIKUM
 
 **Nama  :** Ahmad Naufal Ilham  
 **NIM   :** 2341720047  
