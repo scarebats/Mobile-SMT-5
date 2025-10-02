@@ -1343,11 +1343,6 @@ class WelcomeHeader extends StatelessWidget {
                     color: Colors.blue.shade100,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(
-                    Icons.waving_hand,
-                    color: Colors.blue.shade600,
-                    size: 24,
-                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -1372,48 +1367,6 @@ class WelcomeHeader extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            // Stats Row
-            Row(
-              children: [
-                _buildStatItem(Icons.inventory, '500+', 'Produk'),
-                const SizedBox(width: 16),
-                _buildStatItem(Icons.people, '10K+', 'Pelanggan'),
-                const SizedBox(width: 16),
-                _buildStatItem(Icons.star, '4.8', 'Rating'),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatItem(IconData icon, String value, String label) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200, width: 1),
-        ),
-        child: Column(
-          children: [
-            Icon(icon, color: Colors.blue.shade600, size: 20),
-            const SizedBox(height: 4),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800],
-              ),
-            ),
-            Text(
-              label,
-              style: TextStyle(fontSize: 11, color: Colors.grey[600]),
-            ),
           ],
         ),
       ),
@@ -1427,3 +1380,94 @@ class WelcomeHeader extends StatelessWidget {
 
 # Soal 6
 Selesaikan Praktikum 5: Navigasi dan Rute tersebut. Cobalah modifikasi menggunakan plugin go_router, lalu dokumentasikan dan push ke repository Anda berupa screenshot setiap hasil pekerjaan beserta penjelasannya di file README.md. Kumpulkan link commit repository GitHub Anda kepada dosen yang telah disepakati!
+
+``` dart
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  go_router: ^14.2.7 # Tambahkan dependency go_router
+```
+
+**main**
+``` dart
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'models/item.dart';
+import 'pages/home_page.dart';
+import 'pages/item_page.dart';
+
+// GoRouter configuration
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: '/item',
+      builder: (context, state) {
+        final item = state.extra as Item;
+        return ItemPage(item: item);
+      },
+    ),
+  ],
+);
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'CakraMarketplace - Go Router',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      routerConfig: _router, // Using go_router instead of traditional routes
+    );
+  }
+}
+```
+
+**home_page**
+``` dart
+return ProductCard(
+  item: item,
+  onTap: () {
+    context.go('/item', extra: item);
+  },
+);
+```
+
+**item_page**
+``` dart
+class ItemPage extends StatelessWidget {
+  final Item item;
+
+  const ItemPage({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    // No need for ModalRoute.of(context)!.settings.arguments
+    // Item is directly available as this.item
+    ...
+  }
+}
+```
+
+Fungsi utama go_router
+- Navigasi lebih simpel → Tidak perlu Navigator.of(context).push(...), cukup pakai context.go('/path') atau context.push('/path').
+- Deklaratif → Semua rute didefinisikan di awal, jadi lebih rapi.
+- Mendukung URL → Bagus untuk Flutter Web, karena URL di browser bisa sinkron dengan rute.
+- State restoration → Mendukung back/forward browser button.
+- Nested routes → Bisa punya struktur halaman bertingkat.
+
+![](img/image17.png)

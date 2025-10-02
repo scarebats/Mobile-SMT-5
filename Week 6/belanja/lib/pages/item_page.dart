@@ -5,17 +5,19 @@ import '../widgets/app_footer.dart';
 import '../widgets/custom_app_bar.dart';
 
 class ItemPage extends StatelessWidget {
-  const ItemPage({super.key});
+  final Item item;
+
+  const ItemPage({super.key, required this.item});
 
   Widget _getProductIcon(String productName) {
     String imageUrl;
 
     switch (productName.toLowerCase()) {
       case 'gula':
-        imageUrl = 'assets/images/gula.jpg';
+        imageUrl = 'images/gula.jpg';
         break;
       case 'garam':
-        imageUrl = 'assets/images/garam.jpg';
+        imageUrl = 'images/garam.jpg';
         break;
       default:
         return Center(
@@ -38,7 +40,10 @@ class ItemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final item = ModalRoute.of(context)!.settings.arguments as Item;
+    // final item = ModalRoute.of(context)!.settings.arguments as Item;
+    // final heroTag = 'item-hero-${item.name}';
+
+    // Define heroTag for the Hero widget
     final heroTag = 'item-hero-${item.name}';
 
     return Scaffold(

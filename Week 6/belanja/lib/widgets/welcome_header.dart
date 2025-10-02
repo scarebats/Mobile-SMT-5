@@ -34,11 +34,6 @@ class WelcomeHeader extends StatelessWidget {
                     color: Colors.blue.shade100,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(
-                    Icons.waving_hand,
-                    color: Colors.blue.shade600,
-                    size: 24,
-                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -62,48 +57,6 @@ class WelcomeHeader extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            const SizedBox(height: 16),
-            // Stats Row
-            Row(
-              children: [
-                _buildStatItem(Icons.inventory, '500+', 'Produk'),
-                const SizedBox(width: 16),
-                _buildStatItem(Icons.people, '10K+', 'Pelanggan'),
-                const SizedBox(width: 16),
-                _buildStatItem(Icons.star, '4.8', 'Rating'),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatItem(IconData icon, String value, String label) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200, width: 1),
-        ),
-        child: Column(
-          children: [
-            Icon(icon, color: Colors.blue.shade600, size: 20),
-            const SizedBox(height: 4),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800],
-              ),
-            ),
-            Text(
-              label,
-              style: TextStyle(fontSize: 11, color: Colors.grey[600]),
             ),
           ],
         ),
