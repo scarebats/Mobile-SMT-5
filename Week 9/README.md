@@ -1234,8 +1234,28 @@ class _FilterScreenState extends State<FilterScreen> {
 # Soal 3
 Jelaskan maksud void async pada praktikum 1?
 
+void async berarti suatu fungsi atau metode yang berjalan secara asinkron (tidak langsung selesai) dan tidak mengembalikan nilai apa pun.
+
+- async menunjukkan bahwa fungsi tersebut dijalankan secara asinkron, artinya perintah di dalamnya bisa menunggu proses tertentu (seperti membaca file, mengakses jaringan, atau operasi waktu lama) tanpa menghentikan jalannya program utama.
+- void menunjukkan bahwa fungsi tersebut tidak mengembalikan hasil (nilai) setelah selesai dijalankan.
+
+Contoh deskripsi penggunaannya:
+- Dalam pemrograman C#, async void biasanya digunakan untuk event handler (misalnya ketika tombol diklik).
+- Fungsi tersebut bisa menjalankan operasi asinkron seperti await Task.Delay() atau await HttpClient.GetAsync(), namun tidak mengembalikan nilai, sehingga program utama tidak menunggu hasilnya.
+
 # Soal 4
 Jelaskan fungsi dari anotasi @immutable dan @override ?
+1. @immutable
+Anotasi @immutable digunakan untuk menandai bahwa suatu class bersifat tidak dapat diubah (immutable),
+artinya nilai dari properti-properti di dalam class tersebut tidak boleh berubah setelah objek dibuat.
+
+Fungsi Utama: Menjamin bahwa objek dari class tersebut bersifat tetap (tidak berubah) selama masa hidupnya. Ini membantu mencegah bug, meningkatkan keamanan data, dan efisiensi performa (terutama di Flutter UI).
+
+2. @override
+Anotasi @override digunakan untuk menandai bahwa sebuah metode sedang menimpa (mengganti) metode yang sudah ada di kelas induk (superclass).
+
+Fungsi Utama: Menunjukkan bahwa metode atau properti menggantikan versi yang ada di kelas induk,
+dan membantu menghindari kesalahan pemrograman akibat salah deklarasi.
 
 # Soal 5
 Kumpulkan link commit repository GitHub Anda kepada dosen yang telah disepakati!
