@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:photo_filter_carousel/widget/filter_carousel.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MaterialApp(
+      home: PhotoFilterCarousel(),
+      debugShowCheckedModeBanner: false,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
