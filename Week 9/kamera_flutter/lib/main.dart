@@ -1,7 +1,31 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:kamera_flutter/widget/takepicture_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+// Tambahkan variabel global untuk kamera (meskipun nanti akan dilempar ke widget)
+// Codelab meminta Anda mengambil 'firstCamera' di sini.
+
+Future<void> main() async {
+  // Pastikan plugin terinisialisasi
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Dapatkan daftar kamera
+  final cameras = await availableCameras();
+
+  // Ambil kamera pertama (biasanya kamera belakang)
+  final firstCamera = cameras.first;
+
+  // (runApp akan diedit di Langkah 8)
+  runApp(
+    MaterialApp(
+      theme: ThemeData.dark(),
+      home: TakePictureScreen(
+        // Teruskan kamera yang didapat ke TakePictureScreen
+        camera: firstCamera,
+      ),
+      debugShowCheckedModeBanner: false,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
