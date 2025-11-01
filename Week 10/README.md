@@ -10,6 +10,7 @@ Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF ha
 
 **Langkah 1** 
 Buatlah sebuah project flutter baru dengan nama master_plan di folder src week-10 repository GitHub Anda atau sesuai style laporan praktikum yang telah disepakati. Lalu buatlah susunan folder dalam project seperti gambar berikut ini.
+
 ![](img/image1.png)
 
 **Langkah 2** 
@@ -231,6 +232,7 @@ Mengapa dibuat const Plan()?
 
 # Soal 4
 Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+
 ![](img/image2.png)
 
 Pada langkah ini, dibuat widget _buildTaskTile() yang terdiri dari:
@@ -320,20 +322,142 @@ Edit PlanScreen agar menggunakan data dari PlanProvider. Hapus deklarasi variabe
 
 **Langkah 5** 
 Tambahkan BuildContext sebagai parameter dan gunakan PlanProvider sebagai sumber datanya. Edit bagian kode seperti berikut.
+``` dart
+Widget _buildAddTaskButton(BuildContext context) {
+  ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
+  return FloatingActionButton(
+    child: const Icon(Icons.add),
+    onPressed: () {
+      Plan currentPlan = planNotifier.value;
+      planNotifier.value = Plan(
+        name: currentPlan.name,
+        tasks: List<Task>.from(currentPlan.tasks)..add(const Task()),
+      );
+    },
+  );
+}
+```
 
 **Langkah 6** 
+Tambahkan parameter BuildContext, gunakan PlanProvider sebagai sumber data. Ganti TextField menjadi TextFormField untuk membuat inisial data provider menjadi lebih mudah.
+``` dart
+Widget _buildTaskTile(Task task, int index, BuildContext context) {
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+    Plan currentPlan = widget.plan;
+    int planIndex = planNotifier.value.indexWhere(
+      (p) => p.name == currentPlan.name,
+    );
+
+    return ListTile(
+      leading: Checkbox(
+        value: task.complete,
+        onChanged: (selected) {
+          List<Task> newTasks = List<Task>.from(currentPlan.tasks)
+            ..[index] = Task(
+              description: task.description,
+              complete: selected ?? false,
+            );
+
+          planNotifier.value = List<Plan>.from(planNotifier.value)
+            ..[planIndex] = Plan(name: currentPlan.name, tasks: newTasks);
+
+          setState(() {
+            widget.plan = Plan(name: currentPlan.name, tasks: newTasks);
+          });
+        },
+      ),
+      title: TextFormField(
+        decoration: const InputDecoration(border: UnderlineInputBorder()),
+        initialValue: task.description,
+        onChanged: (text) {
+          List<Task> newTasks = List<Task>.from(currentPlan.tasks)
+            ..[index] = Task(description: text, complete: task.complete);
+
+          planNotifier.value = List<Plan>.from(planNotifier.value)
+            ..[planIndex] = Plan(name: currentPlan.name, tasks: newTasks);
+
+          setState(() {
+            widget.plan = Plan(name: currentPlan.name, tasks: newTasks);
+          });
+        },
+      ),
+    );
+```
+
 **Langkah 7** 
+Sesuaikan parameter pada bagian _buildTaskTile seperti kode berikut.
+``` dart
+Widget _buildList(Plan plan) {
+   return ListView.builder(
+     controller: scrollController,
+     itemCount: plan.tasks.length,
+     itemBuilder: (context, index) =>
+        _buildTaskTile(plan.tasks[index], index, context),
+   );
+}
+```
+
 **Langkah 8** 
-**Langkah 9** 
+Edit method build sehingga bisa tampil progress pada bagian bawah (footer). Caranya, bungkus (wrap) _buildList dengan widget Expanded dan masukkan ke dalam widget Column seperti kode pada Langkah 9.
+
+**Langkah 9**
+Terakhir, tambahkan widget SafeArea dengan berisi completenessMessage pada akhir widget Column. Perhatikan kode berikut ini. 
+``` dart
+@override
+Widget build(BuildContext context) {
+   return Scaffold(
+     appBar: AppBar(title: const Text('Master Plan Naufal')),
+     body: ValueListenableBuilder<Plan>(
+       valueListenable: PlanProvider.of(context),
+       builder: (context, plan, child) {
+         return Column(
+           children: [
+             Expanded(child: _buildList(plan)),
+             SafeArea(child: Text(plan.completenessMessage))
+           ],
+         );
+       },
+     ),
+     floatingActionButton: _buildAddTaskButton(context),
+   );
+}
+```
 
 # Soal 2
 Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
+``` dart
+InheritedNotifier<ValueNotifier<Plan>>
+```
+InheritedWidget adalah salah satu mekanisme state-management dasar bawaan Flutter.
+Fungsinya: menyediakan data dari widget di atas (ancestor) ke widget-widget di bawahnya (descendant) tanpa perlu mengoper data secara manual melalui parameter (props drilling).
+
+Kenapa menggunakan InheritedNotifier?
+- Memudahkan widget anak menerima perubahan state
+- Otomatis memberi tahu (notify) widget yang depend on data ketika data berubah
+- Tidak perlu panggil setState() di widget lain
+- Efisien: hanya widget yang membutuhkan data yang rebuild
 
 # Soal 3
 Jelaskan maksud dari method di langkah 3 pada praktikum tersebut! Mengapa dilakukan demikian?
 
+1) completedCount
+- Ini adalah getter yang menghitung berapa jumlah task yang sudah selesai
+- .where((task) => task.complete) → filter task yang nilai complete-nya true
+- .length → hitung jumlahnya
+Artinya:
+- Mengambil semua task yang selesai dan menghitung berapa banyak
+
+2) completenessMessage
+- Getter untuk menghasilkan kalimat status progress task
+- Menggunakan nilai dari completedCount
+- Contoh output: "3 out of 5 tasks"
+Artinya:
+- Memberikan pesan deskriptif progress yang bisa langsung ditampilkan di UI
+
 # Soal 4
 Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+
+![](img/image3.png)
 
 # Soal 5
 Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke dosen yang telah disepakati !
@@ -359,6 +483,7 @@ Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF ha
 
 # Soal 2
 Berdasarkan Praktikum 3 yang telah Anda lakukan, jelaskan maksud dari gambar diagram berikut ini!
+
 ![](img/Soal2_praktikum3.png)
 
 # Soal 3
