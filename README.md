@@ -17,12 +17,12 @@ Source: https://jti-polinema.github.io/flutter-codelab/index.html
 | Week 6  | Layout dan Navigasi                                          | [Lihat](./Week%206) |
 | Week 7  | Manajemen Plugin                                             | [Lihat](./Week%207) |
 | Week 8  | Ujian Tengah Semester (UTS)                                  | -                   |
-| Week 9  | Kamera                                                       | -                   |
-| Week 10 | Dasar State Management                                       | -                   |
-| Week 11 | Pemrograman Asynchronous                                     | -                   |
-| Week 12 | Streams                                                      | -                   |
-| Week 13 | Persistensi Data                                             | -                   |
-| Week 14 | Restful API                                                  | -                   |
-| Week 15 | Progress Project - Bagian 1                                  | -                   |
-| Week 16 | Progress Project - Bagian 2                                  | -                   |
+| Week 9  | Kamera                                                       | [Lihat](./Week%209) |
+| Week 10 | Dasar State Management                                       | [Lihat](./Week%2010)|
+| Week 11 | Pemrograman Asynchronous                                     | [Lihat](./Week%2011)|
+| Week 12 | Streams                                                      | [Lihat](./Week%2012)|
+| Week 13 | Persistensi Data                                             | [Lihat](./Week%2013)|
+| Week 14 | Restful API                                                  | [Lihat](./Week%2014)|
+| Week 15 | Progress Project - Bagian 1                                  | [Lihat](./Week%2015)|
+| Week 16 | Progress Project - Bagian 2                                  | [Lihat](./Week%2016)|
 | Week 17 | Ujian Akhir Semester (UAS)                                   | -                   |
