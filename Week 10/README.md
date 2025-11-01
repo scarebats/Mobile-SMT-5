@@ -423,6 +423,10 @@ Widget build(BuildContext context) {
 }
 ```
 
+Output
+
+![](img/image3.png)
+
 # Soal 2
 Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
 ``` dart
@@ -459,6 +463,8 @@ Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang tela
 
 ![](img/image3.png)
 
+Dari hasil implementasi, aplikasi sekarang mampu menampilkan perkembangan penyelesaian tugas secara langsung. Setiap kali pengguna menambahkan atau mengedit task, data pada provider akan ter-update, dan tampilan ikut berubah otomatis tanpa perlu pemanggilan setState() di halaman tersebut. Hal ini membuktikan bahwa pengelolaan state sudah terpisah dari UI, dan pembaruan tampilan berjalan reaktif melalui mekanisme listener pada ValueNotifier.
+
 # Soal 5
 Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke dosen yang telah disepakati !
 
@@ -467,27 +473,323 @@ Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke do
 Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, silakan diperbaiki sesuai dengan tujuan aplikasi tersebut dibuat.
 
 **Langkah 1** 
+Perhatikan kode berikut, edit class PlanProvider sehingga dapat menangani List Plan.
+``` dart
+class PlanProvider extends
+InheritedNotifier<ValueNotifier<List<Plan>>> {
+  const PlanProvider({super.key, required Widget child, required
+ValueNotifier<List<Plan>> notifier})
+     : super(child: child, notifier: notifier);
+
+  static ValueNotifier<List<Plan>> of(BuildContext context) {
+    return context.
+dependOnInheritedWidgetOfExactType<PlanProvider>()!.notifier!;
+  }
+}
+```
+
 **Langkah 2** 
+Langkah sebelumnya dapat menyebabkan error pada main.dart dan plan_screen.dart. Pada method build, gantilah menjadi kode seperti ini.
+``` dart
+Widget build(BuildContext context) {
+  return PlanProvider(
+    notifier: ValueNotifier<List<Plan>>(const []),
+    child: MaterialApp(
+      title: 'State management app',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const PlanScreen(),
+    ),
+  );
+}
+```
+
 **Langkah 3** 
+Tambahkan variabel plan dan atribut pada constructor-nya seperti berikut.
+``` dart
+final Plan plan;
+const PlanScreen({super.key, required this.plan});
+```
+
 **Langkah 4** 
+Itu akan terjadi error setiap kali memanggil PlanProvider.of(context). Itu terjadi karena screen saat ini hanya menerima tugas-tugas untuk satu kelompok Plan, tapi sekarang PlanProvider menjadi list dari objek plan tersebut.
+
 **Langkah 5** 
+Tambahkan getter pada _PlanScreenState seperti kode berikut.
+``` dart
+class _PlanScreenState extends State<PlanScreen> {
+  late ScrollController scrollController;
+  Plan get plan => widget.plan;
+```
+
 **Langkah 6** 
+Pada bagian ini kode tetap seperti berikut.
+``` dart
+@override
+void initState() {
+   super.initState();
+   scrollController = ScrollController()
+    ..addListener(() {
+      FocusScope.of(context).requestFocus(FocusNode());
+    });
+}
+```
+
 **Langkah 7** 
+Pastikan Anda telah merubah ke List dan mengubah nilai pada currentPlan seperti kode berikut ini.
+``` dart
+  @override
+  Widget build(BuildContext context) {
+    ValueNotifier<List<Plan>> plansNotifier = PlanProvider.of(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(_plan.name)),
+      body: ValueListenableBuilder<List<Plan>>(
+        valueListenable: plansNotifier,
+        builder: (context, plans, child) {
+          Plan currentPlan = plans.firstWhere((p) => p.name == plan.
+name);
+          return Column(
+            children: [
+              Expanded(child: _buildList(currentPlan)),
+              SafeArea(child: Text(currentPlan.
+completenessMessage)),
+            ],);},),
+      floatingActionButton: _buildAddTaskButton(context,)
+  ,);
+ }
+
+  Widget _buildAddTaskButton(BuildContext context) {
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.
+of(context);
+    return FloatingActionButton(
+      child: const Icon(Icons.add),
+      onPressed: () {
+        Plan currentPlan = plan;
+        int planIndex =
+            planNotifier.value.indexWhere((p) => p.name == currentPlan.name);
+        List<Task> updatedTasks = List<Task>.from(currentPlan.tasks)
+          ..add(const Task());
+        planNotifier.value = List<Plan>.from(planNotifier.value)
+          ..[planIndex] = Plan(
+            name: currentPlan.name,
+            tasks: updatedTasks,
+          );
+        plan = Plan(
+          name: currentPlan.name,
+          tasks: updatedTasks,
+        );},);
+  }
+```
+
 **Langkah 8** 
+Pastikan ubah ke List dan variabel planNotifier seperti kode berikut ini.
+``` dart
+  Widget _buildTaskTile(Task task, int index, BuildContext context)
+{
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.
+of(context);
+
+    return ListTile(
+      leading: Checkbox(
+         value: task.complete,
+         onChanged: (selected) {
+           Plan currentPlan = plan;
+           int planIndex = planNotifier.value
+              .indexWhere((p) => p.name == currentPlan.name);
+           planNotifier.value = List<Plan>.from(planNotifier.value)
+             ..[planIndex] = Plan(
+               name: currentPlan.name,
+               tasks: List<Task>.from(currentPlan.tasks)
+                 ..[index] = Task(
+                   description: task.description,
+                   complete: selected ?? false,
+                 ),);
+         }),
+      title: TextFormField(
+        initialValue: task.description,
+        onChanged: (text) {
+          Plan currentPlan = plan;
+          int planIndex =
+             planNotifier.value.indexWhere((p) => p.name ==
+currentPlan.name);
+          planNotifier.value = List<Plan>.from(planNotifier.value)
+            ..[planIndex] = Plan(
+              name: currentPlan.name,
+              tasks: List<Task>.from(currentPlan.tasks)
+                ..[index] = Task(
+                  description: text,
+                  complete: task.complete,
+                ),
+            );
+},),);}
+```
+
 **Langkah 9** 
+Pada folder view, buatlah file baru dengan nama plan_creator_screen.dart dan deklarasikan dengan StatefulWidget bernama PlanCreatorScreen. Gantilah di main.dart pada atribut home menjadi seperti berikut.
+``` dart
+home: const PlanCreatorScreen(),
+```
+
 **Langkah 10** 
+Kita perlu tambahkan variabel TextEditingController sehingga bisa membuat TextField sederhana untuk menambah Plan baru. Jangan lupa tambahkan dispose ketika widget unmounted seperti kode berikut.
+``` dart
+final textController = TextEditingController();
+
+@override
+void dispose() {
+  textController.dispose();
+  super.dispose();
+}
+```
+
 **Langkah 11** 
+Letakkan method Widget build berikut di atas void dispose. Gantilah ‘Namaku' dengan nama panggilan Anda.
+``` dart
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('Master Plans Naufal')),
+    body: Column(children: [
+      _buildListCreator(),
+      Expanded(child: _buildMasterPlans())
+    ]),
+  );
+}
+```
+
 **Langkah 12** 
+Buatlah widget berikut setelah widget build.
+``` dart
+Widget _buildListCreator() {
+  return Padding(
+     padding: const EdgeInsets.all(20.0),
+     child: Material(
+       color: Theme.of(context).cardColor,
+       elevation: 10,
+       child: TextField(
+          controller: textController,
+          decoration: const InputDecoration(
+             labelText: 'Add a plan',
+             contentPadding: EdgeInsets.all(20)),
+          onEditingComplete: addPlan),
+     ));
+}
+```
+
 **Langkah 13** 
+Tambahkan method berikut untuk menerima inputan dari user berupa text plan.
+``` dart
+void addPlan() {
+  final text = textController.text;
+    if (text.isEmpty) {
+      return;
+    }
+    final plan = Plan(name: text, tasks: []);
+    ValueNotifier<List<Plan>> planNotifier =
+PlanProvider.of(context);
+    planNotifier.value = List<Plan>.from(planNotifier.value)..
+add(plan);
+    textController.clear();
+    FocusScope.of(context).requestFocus(FocusNode());
+    setState(() {});
+}
+```
+
 **Langkah 14** 
+Tambahkan widget seperti kode berikut.
+``` dart
+Widget _buildMasterPlans() {
+  ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+    List<Plan> plans = planNotifier.value;
+
+    if (plans.isEmpty) {
+      return Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: <Widget>[
+           const Icon(Icons.note, size: 100, color: Colors.grey),
+           Text('Anda belum memiliki rencana apapun.',
+              style: Theme.of(context).textTheme.headlineSmall)
+         ]);
+    }
+    return ListView.builder(
+        itemCount: plans.length,
+        itemBuilder: (context, index) {
+          final plan = plans[index];
+          return ListTile(
+              title: Text(plan.name),
+              subtitle: Text(plan.completenessMessage),
+              onTap: () {
+                Navigator.of(context).push(
+                   MaterialPageRoute(builder: (_) =>
+PlanScreen(plan: plan,)));
+              });
+        });
+}
+```
+
+Output
+
+<table>
+  <tr>
+    <td><img src="img/image4.png" width="250"/></td>
+    <td><img src="img/image5.png" width="250"/></td>
+    <td><img src="img/image6.png" width="250"/></td>
+  </tr>
+</table>
 
 # Soal 2
 Berdasarkan Praktikum 3 yang telah Anda lakukan, jelaskan maksud dari gambar diagram berikut ini!
 
 ![](img/Soal2_praktikum3.png)
 
+Diagram tersebut menggambarkan perbedaan struktur aplikasi sebelum dan sesudah penerapan navigasi antar layar.
+
+1. Sebelum Navigasi (Satu Layar / Single Screen)
+
+Pada kondisi awal, aplikasi hanya terdiri dari satu tampilan, PlanCreatorScreen.
+Di layar ini pengguna dapat:
+- Membuat rencana baru dengan memasukkan nama plan
+- Melihat daftar plan yang sudah dibuat
+Semua aktivitas dilakukan dalam satu halaman.
+Meskipun sudah menggunakan PlanProvider untuk menyimpan state, datanya baru dimanfaatkan dalam satu screen saja tanpa perpindahan halaman.
+
+2. Sesudah Navigasi (Multi-Screen)
+
+Pada versi dengan navigasi, ketika pengguna memilih salah satu plan dari daftar, aplikasi akan membuka layar baru menggunakan Navigator.push(), yaitu PlanScreen.
+Di halaman ini pengguna bisa:
+- Menampilkan daftar tugas (Task) dari plan yang dipilih
+- Menambah tugas baru ke dalam plan
+- Melihat status kemajuan penyelesaian tugas
+
+State masih tetap dikelola oleh PlanProvider, tetapi sekarang state tersebut digunakan di lebih dari satu screen.
+
+Dengan pendekatan ini:
+- Data plan tetap konsisten antar layar
+- Perubahan pada task langsung tercermin dalam keseluruhan aplikasi
+- State tidak terikat pada satu widget saja, melainkan diangkat ke level lebih tinggi (Lift State Up) sehingga dapat diakses lintas screen
+
 # Soal 3
 Lakukan capture hasil dari Langkah 14 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+
+<table>
+  <tr>
+    <td><img src="img/image4.png" width="250"/></td>
+    <td><img src="img/image5.png" width="250"/></td>
+    <td><img src="img/image6.png" width="250"/></td>
+  </tr>
+</table>
+
+Pada praktikum ketiga, aplikasi diperluas sehingga dapat menangani lebih dari satu rencana sekaligus (multi-plan).
+
+Beberapa kemampuan yang berhasil diimplementasikan meliputi:
+- Pengguna bisa membuat rencana baru melalui halaman PlanCreatorScreen.
+- Semua rencana yang sudah dibuat ditampilkan dalam daftar menggunakan ListView.
+- Saat pengguna memilih salah satu rencana, aplikasi melakukan navigasi menuju PlanScreen.
+- Di halaman PlanScreen, pengguna dapat menambah daftar tugas serta memberi tanda pada tugas yang sudah selesai.
+- Aplikasi juga menampilkan informasi kemajuan, berupa perbandingan antara jumlah tugas yang selesai dengan jumlah total tugas.
+- Seluruh data tersimpan secara terpusat melalui PlanProvider, sehingga perubahan pada satu bagian aplikasi tetap konsisten dan tidak hilang meski berpindah layar.
 
 # Soal 4
 Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke dosen yang telah disepakati !
