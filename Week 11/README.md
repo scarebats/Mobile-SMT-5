@@ -6,6 +6,7 @@
 
 # Praktikum 1
 **Langkah 1**
+
 Buatlah sebuah project flutter baru dengan nama books di folder src week-11 repository GitHub Anda.
 Kemudian Tambahkan dependensi http dengan mengetik perintah berikut di terminal.
 ``` dart
@@ -13,6 +14,7 @@ flutter pub add http
 ```
 
 **Langkah 2**
+
 Jika berhasil install plugin, pastikan plugin http telah ada di file pubspec ini seperti berikut.
 ``` dart
 dependencies:
@@ -23,6 +25,7 @@ dependencies:
 ```
 
 **Langkah 3**
+
 Ketiklah kode seperti berikut ini.
 Soal 1
 Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
@@ -87,6 +90,7 @@ class _FuturePageState extends State<FuturePage> {
 ```
 
 **Langkah 4**
+
 Tambahkan method ini ke dalam class _FuturePageState yang berguna untuk mengambil data dari API Google Books.
 ``` dart
 Future<http.Response> getData() async {
@@ -106,6 +110,7 @@ Soal 2
 ![](img/image1.png)
 
 **Langkah 5**
+
 Tambahkan kode pada onPressed di ElevatedButton seperti berikut.
 ``` dart
 ElevatedButton(
@@ -138,6 +143,7 @@ Output
 
 # Praktikum 2
 **Langkah 1**
+
 Tambahkan tiga method berisi kode seperti berikut di dalam class _FuturePageState.
 ``` dart
 Future<int> returnOneAsync() async {
@@ -157,6 +163,7 @@ Future<int> returnThreeAsync() async {
 ```
 
 **Langkah 2**
+
 Lalu tambahkan lagi method ini di bawah ketiga method sebelumnya.
 ``` dart
 Future count() async {
@@ -171,6 +178,7 @@ Future count() async {
 ```
 
 **Langkah 3**
+
 Lakukan comment kode sebelumnya, ubah isi kode onPressed() menjadi seperti berikut.
 ``` dart
 ElevatedButton(
@@ -182,6 +190,7 @@ ElevatedButton(
 ```
 
 **Langkah 4**
+
 Akhirnya, run atau tekan F5 jika aplikasi belum running. Maka Anda akan melihat seperti gambar berikut, hasil angka 6 akan tampil setelah delay 9 detik.
 
 Soal 4
@@ -207,12 +216,14 @@ Output
 
 # Praktikum 3
 **Langkah 1**
+
 Pastikan telah impor package async berikut.
 ``` dart
 import 'package:async/async.dart';
 ```
 
 **Langkah 2**
+
 Tambahkan variabel late dan method di class _FuturePageState seperti ini.
 ``` dart
 late Completer completer;
@@ -230,6 +241,7 @@ Future calculate() async {
 ```
 
 **Langkah 3**
+
 Tambahkan kode berikut pada fungsi onPressed(). Kode sebelumnya bisa Anda comment.
 ``` dart
 getNumber().then((value) {
@@ -240,6 +252,7 @@ getNumber().then((value) {
 ```
 
 **Langkah 4**
+
 Terakhir, run atau tekan F5 untuk melihat hasilnya jika memang belum running. Bisa juga lakukan hot restart jika aplikasi sudah running. Maka hasilnya akan seperti gambar berikut ini. Setelah 5 detik, maka angka 42 akan tampil.
 Soal 5
 Jelaskan maksud kode langkah 2 tersebut!
@@ -253,6 +266,7 @@ Output
 ![](img/image4.png)
 
 **Langkah 5**
+
 Gantilah isi code method calculate() seperti kode berikut, atau Anda dapat membuat calculate2()
 ``` dart
 calculate() async {
@@ -267,6 +281,7 @@ calculate() async {
 ```
 
 **Langkah 6**
+
 Ganti menjadi kode seperti berikut di onPressed().
 ``` dart
 getNumber().then((value) {
@@ -289,6 +304,7 @@ Output
 
 # Praktikum 4
 **Langkah 1**
+
 Tambahkan method ini ke dalam class _FuturePageState
 ``` dart
 void returnFG() {
@@ -310,6 +326,7 @@ void returnFG() {
 ```
 
 **Langkah 2**
+
 Anda bisa hapus atau comment kode sebelumnya, kemudian panggil method dari langkah 1 tersebut.
 ``` dart
 onPressed: () {
@@ -318,6 +335,7 @@ onPressed: () {
 ```
 
 **Langkah 3**
+
 Anda akan melihat hasilnya dalam 3 detik berupa angka 6 lebih cepat dibandingkan praktikum sebelumnya menunggu sampai 9 detik.
 Soal 7
 Output
@@ -325,6 +343,7 @@ Output
 ![](img/image3.png)
 
 **Langkah 4**
+
 Anda dapat menggunakan FutureGroup dengan Future.wait seperti kode berikut.
 ``` dart
 final futures = Future.wait<int>([
@@ -340,6 +359,7 @@ Jelaskan maksud perbedaan kode langkah 1 dan 4!
 
 # Praktikum 5
 **Langkah 1**
+
 Tambahkan method ini ke dalam class _FuturePageState
 ``` dart
 Future returnError() async {
@@ -349,6 +369,7 @@ Future returnError() async {
 ```
 
 **Langkah 2**
+
 Ganti dengan kode berikut di ElevatedButton
 ``` dart
 returnError()
@@ -366,6 +387,7 @@ returnError()
 ```
 
 **Langkah 3**
+
 Lakukan run dan klik tombol GO! maka akan menghasilkan seperti gambar berikut.
 Pada bagian debug console akan melihat teks Complete seperti berikut.
 
@@ -377,6 +399,7 @@ Output
 ![](img/image6.png)
 
 **Langkah 4**
+
 Tambahkan kode ini di dalam class _FutureStatePage
 ``` dart
 
@@ -391,12 +414,14 @@ Sedangkan pada langkah 4, digunakan pendekatan try-catch-finally yang membuat al
 
 # Praktikum 6
 **Langkah 1**
+
 Tambahkan plugin geolocator dengan mengetik perintah berikut di terminal.
 ``` dart
 flutter pub add geolocator
 ```
 
 **Langkah 2**
+
 Jika Anda menargetkan untuk platform Android, maka tambahkan baris kode berikut di file android/app/src/main/androidmanifest.xml
 ``` dart
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -409,12 +434,15 @@ Jika Anda menargetkan untuk platform iOS, maka tambahkan kode ini ke file Info.p
 ```
 
 **Langkah 3**
+
 Tambahkan file baru ini di folder lib project Anda dengan nama geolocation.dart.
 
 **Langkah 4**
+
 Buat class LocationScreen di dalam file geolocation.dart
 
 **Langkah 5**
+
 ``` dart
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -461,17 +489,20 @@ Soal 11
 Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda.
 
 **Langkah 6**
+
 Panggil screen baru tersebut di file main Anda seperti berikut.
 ``` dart
 home: const LocationScreen(),
 ```
 
 **Langkah 7**
+
 Run project Anda di device atau emulator (bukan browser), maka akan tampil seperti berikut ini.
 
 ![](img/image7.png)
 
 **Langkah 8**
+
 Tambahkan widget loading seperti kode berikut. Lalu hot restart, perhatikan perubahannya.
 ``` dart
 @override
@@ -507,6 +538,7 @@ Output
 
 # Praktikum 7
 **Langkah 1**
+
 Buka file geolocation.dart kemudian ganti isi method dengan kode ini.
 ``` dart
 Future<Position> getPosition() async {
@@ -518,12 +550,14 @@ Future<Position> getPosition() async {
 ```
 
 **Langkah 2**
+
 Tambah variabel ini di class _LocationScreenState
 ``` dart
 Future<Position>? position;
 ```
 
 **Langkah 3**
+
 Tambah method ini dan set variabel position
 ``` dart
 @override
@@ -534,6 +568,7 @@ void initState() {
 ```
 
 **Langkah 4**
+
 Ketik kode berikut dan sesuaikan. Kode lama bisa Anda comment atau hapus.
 ``` dart
 @override
@@ -571,6 +606,7 @@ Output
 ![](img/image9.png)
 
 **Langkah 5**
+
 Tambahkan kode berikut untuk menangani ketika terjadi error. Kemudian hot restart.
 ``` dart
 else if (snapshot.connectionState == ConnectionState.done) {
@@ -590,9 +626,11 @@ Output
 
 # Praktikum 8
 **Langkah 1**
+
 Buatlah file baru ini di project lib Anda.
 
 **Langkah 2**
+
 ``` dart
 import 'package:flutter/material.dart';
 
@@ -631,6 +669,7 @@ Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerja
 Silakan ganti dengan warna tema favorit Anda.
 
 **Langkah 3**
+
 Tambahkan method ini.
 ``` dart
   Future _navigateAndGetColor(BuildContext context) async {
@@ -645,9 +684,11 @@ Tambahkan method ini.
 ```
 
 **Langkah 4**
+
 Buat file baru ini di project lib Anda. Silakan jika ingin mengelompokkan view menjadi satu folder dan sesuaikan impor yang dibutuhkan.
 
 **Langkah 5**
+
 ``` dart
 import 'package:flutter/material.dart';
 
@@ -698,12 +739,14 @@ class _NavigationSecondState extends State<NavigationSecond> {
 ```
 
 **Langkah 6**
+
 Lakukan edit properti home.
 ``` dart
 home: const NavigationFirst(),
 ```
 
 **Langkah 7**
+
 Lakukan run, jika terjadi error silakan diperbaiki.
 Soal 16
 Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
@@ -745,9 +788,11 @@ Output
 
 # Praktikum 9
 **Langkah 1**
+
 Buat file dart baru di folder lib project Anda.
 
 **Langkah 2**
+
 ``` dart
 import 'package:flutter/material.dart';
 
@@ -780,6 +825,7 @@ class _NavigationDialogScreenState extends State<NavigationDialogScreen> {
 ```
 
 **Langkah 3**
+
 ``` dart
 _showColorDialog(BuildContext context) async {
   await showDialog(
@@ -820,6 +866,7 @@ _showColorDialog(BuildContext context) async {
 ```
 
 **Langkah 4**
+
 ``` dart
 onPressed() {
   _showColorDialog(context);
@@ -827,12 +874,14 @@ onPressed() {
 ```
 
 **Langkah 5**
+
 Ubah properti home
 ``` dart
 home: const NavigationDialogScreen(),
 ```
 
 **Langkah 6**
+
 Coba ganti warna background dengan widget dialog tersebut. Jika terjadi error, silakan diperbaiki. Jika berhasil, akan tampil seperti gambar berikut.
 Soal 17
 Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
