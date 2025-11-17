@@ -12,9 +12,11 @@ Selesaikan Praktikum 1 dan 2, lalu dokumentasikan dan push ke repository Anda be
 ## Praktikum 1
 
 **Langkah 1**
+
 Buatlah sebuah project flutter baru dengan nama kamera_flutter, lalu sesuaikan style laporan praktikum yang Anda buat.
 
 **Langkah 2**
+
 Anda memerlukan tiga dependensi pada project flutter untuk menyelesaikan praktikum ini.
 
 camera → menyediakan seperangkat alat untuk bekerja dengan kamera pada device.
@@ -29,6 +31,7 @@ flutter pub add camera path_provider path
 ```
 
 **Langkah 3**
+
 Selanjutnya, kita perlu mengecek jumlah kamera yang tersedia pada perangkat menggunakan plugin camera seperti pada kode berikut ini. Kode ini letakkan dalam void main().
 
 lib/main.dart
@@ -63,6 +66,7 @@ Future<void> main() async {
 ```
 
 **Langkah 4**
+
 Setelah Anda dapat mengakses kamera, gunakan langkah-langkah berikut untuk membuat dan menginisialisasi CameraController. Pada langkah berikut ini, Anda akan membuat koneksi ke kamera perangkat yang memungkinkan Anda untuk mengontrol kamera dan menampilkan pratinjau umpan kamera.
 
 1. Buat StatefulWidget dengan kelas State pendamping.
@@ -121,6 +125,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 ```
 
 **Langkah 5**
+
 Gunakan widget CameraPreview dari package camera untuk menampilkan preview foto. Anda perlu tipe objek void berupa FutureBuilder untuk menangani proses async.
 lib/widget/takepicture_screen.dart
 ``` dart
@@ -147,6 +152,7 @@ Widget build(BuildContext context) {
 ```
 
 **Langkah 6**
+
 Anda dapat menggunakan CameraController untuk mengambil gambar menggunakan metode takePicture(), yang mengembalikan objek XFile, merupakan sebuah objek abstraksi File lintas platform yang disederhanakan. Pada Android dan iOS, gambar baru disimpan dalam direktori cache masing-masing, dan path ke lokasi tersebut dikembalikan dalam XFile.
 
 Pada codelab ini, buatlah sebuah FloatingActionButton yang digunakan untuk mengambil gambar menggunakan CameraController saat pengguna mengetuk tombol.
@@ -191,6 +197,7 @@ Widget build(BuildContext context) {
 ```
 
 **Langkah 7**
+
 Buatlah file baru pada folder widget yang berisi kode berikut.
 
 lib/widget/displaypicture_screen.dart
@@ -217,6 +224,7 @@ class DisplayPictureScreen extends StatelessWidget {
 ```
 
 **Langkah 8**
+
 Edit pada file ini bagian runApp seperti kode berikut.
 
 lib/main.dart
@@ -243,6 +251,7 @@ Future<void> main() async {
 ```
 
 **Langkah 9**
+
 Tambahkan kode seperti berikut pada bagian try / catch agar dapat menampilkan hasil foto pada DisplayPictureScreen.
 
 lib/widget/takepicture_screen.dart
@@ -281,9 +290,11 @@ floatingActionButton: FloatingActionButton(
 ## Praktikum 2
 
 **Langkah 1**
+
 Buatlah project flutter baru di pertemuan 09 dengan nama photo_filter_carousel
 
 **Langkah 2**
+
 Buatlah folder widget dan file baru yang berisi kode berikut.
 
 lib/widget/filter_selector.dart
@@ -452,6 +463,7 @@ class _FilterSelectorState extends State<FilterSelector> {
 ```
 
 **Langkah 3**
+
 Buat file baru di folder widget dengan kode seperti berikut.
 
 lib/widget/filter_carousel.dart
@@ -530,6 +542,7 @@ class _PhotoFilterCarouselState extends State<PhotoFilterCarousel> {
 ```
 
 **Langkah 4**
+
 Buat file baru di folder widget seperti kode berikut.
 
 lib/widget/carousel_flowdelegate.dart
@@ -599,6 +612,7 @@ class CarouselFlowDelegate extends FlowDelegate {
 ```
 
 **Langkah 5**
+
 Buat file baru di folder widget seperti kode berikut ini.
 
 lib/widget/filter_item.dart
@@ -642,6 +656,7 @@ class FilterItem extends StatelessWidget {
 ```
 
 **Langkah 6**
+
 Terakhir, kita impor widget PhotoFilterCarousel ke main seperti kode berikut ini.
 
 lib/main.dart
