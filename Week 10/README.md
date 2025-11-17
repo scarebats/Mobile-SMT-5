@@ -9,11 +9,13 @@
 Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, silakan diperbaiki.
 
 **Langkah 1** 
+
 Buatlah sebuah project flutter baru dengan nama master_plan di folder src week-10 repository GitHub Anda atau sesuai style laporan praktikum yang telah disepakati. Lalu buatlah susunan folder dalam project seperti gambar berikut ini.
 
 ![](img/image1.png)
 
 **Langkah 2** 
+
 Praktik terbaik untuk memulai adalah pada lapisan data (data layer). Ini akan memberi Anda gambaran yang jelas tentang aplikasi Anda, tanpa masuk ke detail antarmuka pengguna Anda. Di folder model, buat file bernama task.dart dan buat class Task. Class ini memiliki atribut description dengan tipe data String dan complete dengan tipe data Boolean, serta ada konstruktor. Kelas ini akan menyimpan data tugas untuk aplikasi kita. Tambahkan kode berikut:
 ``` dart
 class Task {
@@ -25,6 +27,7 @@ class Task {
 ```
 
 **Langkah 3** 
+
 Kita juga perlu sebuah List untuk menyimpan daftar rencana dalam aplikasi to-do ini. Buat file plan.dart di dalam folder models dan isi kode seperti berikut.
 ``` dart
 import 'task.dart';
@@ -38,6 +41,7 @@ class Plan {
 ```
 
 **Langkah 4** 
+
 Kita dapat membungkus beberapa data layer ke dalam sebuah file yang nanti akan mengekspor kedua model tersebut. Dengan begitu, proses impor akan lebih ringkas seiring berkembangnya aplikasi. Buat file bernama data_layer.dart di folder models. Kodenya hanya berisi export seperti berikut.
 ``` dart
 export 'plan.dart';
@@ -45,6 +49,7 @@ export 'task.dart';
 ```
 
 **Langkah 5** 
+
 Ubah isi kode main.dart sebagai berikut.
 ``` dart
 import 'package:flutter/material.dart';
@@ -66,6 +71,7 @@ class MasterPlanApp extends StatelessWidget {
 ```
 
 **Langkah 6** 
+
 Pada folder views, buatlah sebuah file plan_screen.dart dan gunakan templat StatefulWidget untuk membuat class PlanScreen. Isi kodenya adalah sebagai berikut. Gantilah teks ‘Namaku' dengan nama panggilan Anda pada title AppBar.
 ``` dart
 import '../models/data_layer.dart';
@@ -93,6 +99,7 @@ class _PlanScreenState extends State<PlanScreen> {
 ```
 
 **Langkah 7** 
+
 Anda akan melihat beberapa error di langkah 6, karena method yang belum dibuat. Ayo kita buat mulai dari yang paling mudah yaitu tombol Tambah Rencana. Tambah kode berikut di bawah method build di dalam class _PlanScreenState.
 ``` dart
 Widget _buildAddTaskButton() {
@@ -111,6 +118,7 @@ Widget _buildAddTaskButton() {
 ```
 
 **Langkah 8** 
+
 Kita akan buat widget berupa List yang dapat dilakukan scroll, yaitu ListView.builder. Buat widget ListView seperti kode berikut ini.
 ``` dart
 Widget _buildList() {
@@ -122,6 +130,7 @@ Widget _buildList() {
 ```
 
 **Langkah 9** 
+
 Dari langkah 8, kita butuh ListTile untuk menampilkan setiap nilai dari plan.tasks. Kita buat dinamis untuk setiap index data, sehingga membuat view menjadi lebih mudah. Tambahkan kode berikut ini.
 ``` dart
 Widget _buildTaskTile(Task task, int index) {
@@ -158,12 +167,14 @@ Widget _buildTaskTile(Task task, int index) {
 ```
 
 **Langkah 10** 
+
 Anda dapat menambah tugas sebanyak-banyaknya, menandainya jika sudah beres, dan melakukan scroll jika sudah semakin banyak isinya. Namun, ada salah satu fitur tertentu di iOS perlu kita tambahkan. Ketika keyboard tampil, Anda akan kesulitan untuk mengisi yang paling bawah. Untuk mengatasi itu, Anda dapat menggunakan ScrollController untuk menghapus focus dari semua TextField selama event scroll dilakukan. Pada file plan_screen.dart, tambahkan variabel scroll controller di class State tepat setelah variabel plan.
 ``` dart
 late ScrollController scrollController;
 ```
 
 **Langkah 11** 
+
 Tambahkan method initState() setelah deklarasi variabel scrollController seperti kode berikut.
 ``` dart
 @override
@@ -177,6 +188,7 @@ void initState() {
 ```
 
 **Langkah 12** 
+
 Tambahkan controller dan keyboard behavior pada ListView di method _buildList seperti kode berikut ini.
 ``` dart
 Widget _buildList() {
@@ -189,6 +201,7 @@ Widget _buildList() {
 ```
 
 **Langkah 13** 
+
 Terakhir, tambahkan method dispose() berguna ketika widget sudah tidak digunakan lagi.
 ``` dart
 @override
@@ -199,6 +212,7 @@ void dispose() {
 ```
 
 **Langkah 14** 
+
 Lakukan Hot restart (bukan hot reload) pada aplikasi Flutter Anda. Anda akan melihat tampilan akhir seperti gambar berikut. Jika masih terdapat error, silakan diperbaiki hingga bisa running.
 
 ![](img/image2.png)
@@ -274,6 +288,7 @@ Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke do
 Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, silakan diperbaiki sesuai dengan tujuan aplikasi tersebut dibuat.
 
 **Langkah 1** 
+
 Buat folder baru provider di dalam folder lib, lalu buat file baru dengan nama plan_provider.dart berisi kode seperti berikut.
 ``` dart
 import 'package:flutter/material.dart';
@@ -295,6 +310,7 @@ class PlanProvider extends InheritedNotifier<ValueNotifier<Plan>> {
 ```
 
 **Langkah 2** 
+
 Gantilah pada bagian atribut home dengan PlanProvider seperti berikut. Jangan lupa sesuaikan bagian impor jika dibutuhkan.
 ``` dart
 return MaterialApp(
@@ -306,7 +322,8 @@ return MaterialApp(
 );
 ```
 
-**Langkah 3** 
+**Langkah 3**
+
 Tambahkan dua method di dalam model class Plan seperti kode berikut.
 ``` dart
 int get completedCount => tasks
@@ -318,9 +335,11 @@ String get completenessMessage =>
 ```
 
 **Langkah 4** 
+
 Edit PlanScreen agar menggunakan data dari PlanProvider. Hapus deklarasi variabel plan (ini akan membuat error). Kita akan perbaiki pada langkah 5 berikut ini.
 
 **Langkah 5** 
+
 Tambahkan BuildContext sebagai parameter dan gunakan PlanProvider sebagai sumber datanya. Edit bagian kode seperti berikut.
 ``` dart
 Widget _buildAddTaskButton(BuildContext context) {
@@ -339,6 +358,7 @@ Widget _buildAddTaskButton(BuildContext context) {
 ```
 
 **Langkah 6** 
+
 Tambahkan parameter BuildContext, gunakan PlanProvider sebagai sumber data. Ganti TextField menjadi TextFormField untuk membuat inisial data provider menjadi lebih mudah.
 ``` dart
 Widget _buildTaskTile(Task task, int index, BuildContext context) {
@@ -385,6 +405,7 @@ Widget _buildTaskTile(Task task, int index, BuildContext context) {
 ```
 
 **Langkah 7** 
+
 Sesuaikan parameter pada bagian _buildTaskTile seperti kode berikut.
 ``` dart
 Widget _buildList(Plan plan) {
@@ -398,9 +419,11 @@ Widget _buildList(Plan plan) {
 ```
 
 **Langkah 8** 
+
 Edit method build sehingga bisa tampil progress pada bagian bawah (footer). Caranya, bungkus (wrap) _buildList dengan widget Expanded dan masukkan ke dalam widget Column seperti kode pada Langkah 9.
 
 **Langkah 9**
+
 Terakhir, tambahkan widget SafeArea dengan berisi completenessMessage pada akhir widget Column. Perhatikan kode berikut ini. 
 ``` dart
 @override
@@ -473,6 +496,7 @@ Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke do
 Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, silakan diperbaiki sesuai dengan tujuan aplikasi tersebut dibuat.
 
 **Langkah 1** 
+
 Perhatikan kode berikut, edit class PlanProvider sehingga dapat menangani List Plan.
 ``` dart
 class PlanProvider extends
@@ -489,6 +513,7 @@ dependOnInheritedWidgetOfExactType<PlanProvider>()!.notifier!;
 ```
 
 **Langkah 2** 
+
 Langkah sebelumnya dapat menyebabkan error pada main.dart dan plan_screen.dart. Pada method build, gantilah menjadi kode seperti ini.
 ``` dart
 Widget build(BuildContext context) {
@@ -506,6 +531,7 @@ Widget build(BuildContext context) {
 ```
 
 **Langkah 3** 
+
 Tambahkan variabel plan dan atribut pada constructor-nya seperti berikut.
 ``` dart
 final Plan plan;
@@ -513,9 +539,11 @@ const PlanScreen({super.key, required this.plan});
 ```
 
 **Langkah 4** 
+
 Itu akan terjadi error setiap kali memanggil PlanProvider.of(context). Itu terjadi karena screen saat ini hanya menerima tugas-tugas untuk satu kelompok Plan, tapi sekarang PlanProvider menjadi list dari objek plan tersebut.
 
 **Langkah 5** 
+
 Tambahkan getter pada _PlanScreenState seperti kode berikut.
 ``` dart
 class _PlanScreenState extends State<PlanScreen> {
@@ -524,6 +552,7 @@ class _PlanScreenState extends State<PlanScreen> {
 ```
 
 **Langkah 6** 
+
 Pada bagian ini kode tetap seperti berikut.
 ``` dart
 @override
@@ -537,6 +566,7 @@ void initState() {
 ```
 
 **Langkah 7** 
+
 Pastikan Anda telah merubah ke List dan mengubah nilai pada currentPlan seperti kode berikut ini.
 ``` dart
   @override
@@ -584,6 +614,7 @@ of(context);
 ```
 
 **Langkah 8** 
+
 Pastikan ubah ke List dan variabel planNotifier seperti kode berikut ini.
 ``` dart
   Widget _buildTaskTile(Task task, int index, BuildContext context)
@@ -627,12 +658,14 @@ currentPlan.name);
 ```
 
 **Langkah 9** 
+
 Pada folder view, buatlah file baru dengan nama plan_creator_screen.dart dan deklarasikan dengan StatefulWidget bernama PlanCreatorScreen. Gantilah di main.dart pada atribut home menjadi seperti berikut.
 ``` dart
 home: const PlanCreatorScreen(),
 ```
 
 **Langkah 10** 
+
 Kita perlu tambahkan variabel TextEditingController sehingga bisa membuat TextField sederhana untuk menambah Plan baru. Jangan lupa tambahkan dispose ketika widget unmounted seperti kode berikut.
 ``` dart
 final textController = TextEditingController();
@@ -645,6 +678,7 @@ void dispose() {
 ```
 
 **Langkah 11** 
+
 Letakkan method Widget build berikut di atas void dispose. Gantilah ‘Namaku' dengan nama panggilan Anda.
 ``` dart
 @override
@@ -660,6 +694,7 @@ Widget build(BuildContext context) {
 ```
 
 **Langkah 12** 
+
 Buatlah widget berikut setelah widget build.
 ``` dart
 Widget _buildListCreator() {
@@ -679,6 +714,7 @@ Widget _buildListCreator() {
 ```
 
 **Langkah 13** 
+
 Tambahkan method berikut untuk menerima inputan dari user berupa text plan.
 ``` dart
 void addPlan() {
@@ -698,6 +734,7 @@ add(plan);
 ```
 
 **Langkah 14** 
+
 Tambahkan widget seperti kode berikut.
 ``` dart
 Widget _buildMasterPlans() {
