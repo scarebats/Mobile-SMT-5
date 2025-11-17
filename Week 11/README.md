@@ -28,7 +28,8 @@ dependencies:
 
 Ketiklah kode seperti berikut ini.
 Soal 1
-Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
+
+1. Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
 ``` dart
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -101,7 +102,9 @@ Future<http.Response> getData() async {
   }
 ```
 Soal 2
+
 1. Carilah judul buku favorit Anda di Google Books, lalu ganti ID buku pada variabel path di kode tersebut. Caranya ambil di URL browser Anda seperti gambar berikut ini.
+
 - Judul Buku : Dimensi Manusia & Ruang Interior
 - ID Buku : AVjZVuvZsHYC
 
@@ -130,11 +133,14 @@ ElevatedButton(
 ),
 ```
 Soal 3
-Jelaskan maksud kode langkah 5 tersebut terkait substring dan catchError!
+1. Jelaskan maksud kode langkah 5 tersebut terkait substring dan catchError!
+
 Penjelasan substring:
+
 Kode value.body.toString().substring(0, 450); digunakan untuk memotong isi teks hasil response agar hanya menampilkan 450 karakter pertama saja. Tujuannya supaya data yang ditampilkan di layar tidak terlalu panjang, sehingga tampilan tetap rapi dan mudah dibaca.
 
 Penjelasan catchError:
+
 catchError berfungsi untuk menangkap dan menangani kesalahan yang mungkin muncul saat proses getData() dijalankan. Jika terjadi error — seperti gagal terhubung ke internet atau server tidak merespons — maka variabel result akan diisi dengan pesan “Terjadi kesalahan”, dan tampilan aplikasi akan diperbarui agar pengguna mengetahui adanya masalah.
 
 Output
@@ -194,11 +200,12 @@ ElevatedButton(
 Akhirnya, run atau tekan F5 jika aplikasi belum running. Maka Anda akan melihat seperti gambar berikut, hasil angka 6 akan tampil setelah delay 9 detik.
 
 Soal 4
-Jelaskan maksud kode langkah 1 dan 2 tersebut!
+
+1. Jelaskan maksud kode langkah 1 dan 2 tersebut!
 
 - Penjelasan Langkah 1:
-Ketiga method pada langkah 1 (returnOneAsync, returnTwoAsync, dan returnThreeAsync) merupakan fungsi asynchronous yang memakai await Future.delayed(Duration(seconds: 3)) untuk menirukan proses yang memakan waktu, seperti permintaan data ke server.
-Setelah menunggu selama 3 detik, masing-masing fungsi akan mengembalikan nilai 1, 2, dan 3 secara berurutan.
+  - Ketiga method pada langkah 1 (returnOneAsync, returnTwoAsync, dan returnThreeAsync) merupakan fungsi asynchronous yang memakai await Future.delayed(Duration(seconds: 3)) untuk menirukan proses yang memakan waktu, seperti permintaan data ke server.
+  - Setelah menunggu selama 3 detik, masing-masing fungsi akan mengembalikan nilai 1, 2, dan 3 secara berurutan.
 
 - Penjelasan Langkah 2:
 Fungsi count() berfungsi untuk:
@@ -254,8 +261,11 @@ getNumber().then((value) {
 **Langkah 4**
 
 Terakhir, run atau tekan F5 untuk melihat hasilnya jika memang belum running. Bisa juga lakukan hot restart jika aplikasi sudah running. Maka hasilnya akan seperti gambar berikut ini. Setelah 5 detik, maka angka 42 akan tampil.
+
 Soal 5
-Jelaskan maksud kode langkah 2 tersebut!
+
+1. Jelaskan maksud kode langkah 2 tersebut!
+
 - Dengan Completer, kita bisa menentukan sendiri kapan sebuah Future dianggap selesai.
 - Fungsi getNumber() membuat sebuah Future baru dan kemudian memanggil calculate().
 - Di dalam calculate(), proses menunggu dilakukan selama 5 detik, lalu Future diselesaikan dengan perintah completer.complete(42).
@@ -292,8 +302,11 @@ getNumber().then((value) {
   result = 'An error occurred';
 });
 ```
+
 Soal 6
-Jelaskan maksud perbedaan kode langkah 2 dengan langkah 5-6 tersebut!
+
+1. Jelaskan maksud perbedaan kode langkah 2 dengan langkah 5-6 tersebut!
+
 - Pada langkah 2, fungsi calculate() dianggap selalu berhasil dijalankan, sehingga Future langsung diselesaikan menggunakan complete(42) tanpa kemungkinan gagal.
 - Namun pada langkah 5, fungsinya dibuat lebih realistis, di mana proses perhitungan bisa saja menimbulkan error. Karena itu, digunakan completer.completeError(e) untuk menandai bahwa Future berakhir dengan kesalahan.
 - Kemudian di langkah 6, bagian tombol dilengkapi dengan penanganan error menggunakan .catchError(...), agar ketika terjadi kegagalan, aplikasi tidak berhenti tiba-tiba dan menampilkan pesan "An error occurred" sebagai gantinya.
@@ -337,7 +350,9 @@ onPressed: () {
 **Langkah 3**
 
 Anda akan melihat hasilnya dalam 3 detik berupa angka 6 lebih cepat dibandingkan praktikum sebelumnya menunggu sampai 9 detik.
+
 Soal 7
+
 Output
 
 ![](img/image3.png)
@@ -352,8 +367,11 @@ final futures = Future.wait<int>([
   returnThreeAsync(),
 ]);
 ```
+
 Soal 8
-Jelaskan maksud perbedaan kode langkah 1 dan 4!
+
+1. Jelaskan maksud perbedaan kode langkah 1 dan 4!
+
 - Pada langkah 1, digunakan FutureGroup untuk mengelola dan menggabungkan beberapa Future secara manual, sehingga setiap Future dimasukkan satu per satu sebelum dijalankan bersamaan.
 - Sementara pada langkah 4, digunakan Future.wait, yang memungkinkan menjalankan banyak Future secara paralel hanya dengan satu perintah sederhana, tanpa perlu menambahkannya satu per satu seperti pada FutureGroup.
 
@@ -394,6 +412,7 @@ Pada bagian debug console akan melihat teks Complete seperti berikut.
 ![](img/image5.png)
 
 Soal 9
+
 Output
 
 ![](img/image6.png)
@@ -404,8 +423,11 @@ Tambahkan kode ini di dalam class _FutureStatePage
 ``` dart
 
 ```
+
 Soal 10
-Panggil method handleError() tersebut di ElevatedButton, lalu run. Apa hasilnya? Jelaskan perbedaan kode langkah 1 dan 4!
+
+1. Panggil method handleError() tersebut di ElevatedButton, lalu run. Apa hasilnya? Jelaskan perbedaan kode langkah 1 dan 4!
+
 Saat method handleError() dijalankan, pesan kesalahan akan muncul di tampilan aplikasi, sementara teks "complete" akan tercetak di debug console.
 
 Perbedaan utama antara langkah 1 dan langkah 4 terletak pada cara menangani error.
@@ -486,7 +508,8 @@ class _LocationScreenState extends State<LocationScreen> {
 }
 ```
 Soal 11
-Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda.
+
+1. Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda.
 
 **Langkah 6**
 
@@ -517,8 +540,11 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
 Soal 12
-Jika Anda tidak melihat animasi loading tampil, kemungkinan itu berjalan sangat cepat. Tambahkan delay pada method getPosition() dengan kode await Future.delayed(const Duration(seconds: 3));
+
+1. Jika Anda tidak melihat animasi loading tampil, kemungkinan itu berjalan sangat cepat. Tambahkan delay pada method getPosition() dengan kode await Future.delayed(const Duration(seconds: 3));
+
 ``` dart
 Future<Position> getPosition() async {
   await Geolocator.requestPermission();
@@ -529,7 +555,8 @@ Future<Position> getPosition() async {
 }
 ```
 
-Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
+2. Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
+
 Saya masih bisa mendapatkan koordinat GPS saat aplikasi dijalankan di browser, karena browser sudah memiliki API Geolocation bawaan. API ini memungkinkan browser untuk mengakses lokasi perangkat secara langsung, asalkan pengguna memberikan izin lokasi ketika diminta melalui pop-up permission di browser.
 
 Output
@@ -595,8 +622,11 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
 Soal 13
-Apakah ada perbedaan UI dengan praktikum sebelumnya? Mengapa demikian?
+
+1. Apakah ada perbedaan UI dengan praktikum sebelumnya? Mengapa demikian?
+
 - Tampilan utama memang tidak berubah, tetapi mekanisme pembaruan UI-nya berbeda.
 - Jika sebelumnya pembaruan dilakukan secara manual menggunakan setState(), kini dengan FutureBuilder, tampilan akan menyesuaikan secara otomatis mengikuti status dari Future.
 - Pendekatan ini membuat kode lebih sederhana, terstruktur, dan responsif terhadap perubahan data.
@@ -616,8 +646,11 @@ else if (snapshot.connectionState == ConnectionState.done) {
   return Text(snapshot.data.toString());
 }
 ```
+
 Soal 14
-Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
+
+1. Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
+
 Tidak, tampilannya masih sama, tetapi kini saat terjadi error, antarmuka akan menampilkan pesan kesalahan. Hal ini karena sudah ditambahkan pengecekan snapshot.hasError, sehingga aplikasi tidak berhenti tiba-tiba dan pengguna tetap mendapatkan informasi yang jelas mengenai masalah yang terjadi.
 
 Output
@@ -663,10 +696,12 @@ class _NavigationFirstState extends State<NavigationFirst> {
   }
 }
 ```
-Soal 15
-Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda.
 
-Silakan ganti dengan warna tema favorit Anda.
+Soal 15
+
+1. Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda.
+
+2. Silakan ganti dengan warna tema favorit Anda.
 
 **Langkah 3**
 
@@ -748,13 +783,16 @@ home: const NavigationFirst(),
 **Langkah 7**
 
 Lakukan run, jika terjadi error silakan diperbaiki.
+
 Soal 16
-Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+
+1. Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+
 - Saat salah satu tombol warna ditekan di halaman kedua, aplikasi akan mengirimkan data warna yang dipilih kembali ke halaman pertama melalui perintah Navigator.pop(context, color).
 - Di halaman pertama, nilai tersebut diterima menggunakan await Navigator.push(), lalu dilakukan setState() untuk mengubah warna latar belakang sesuai pilihan pengguna.
 - Proses ini dimungkinkan karena Navigator dapat mengirimkan data balik dari halaman yang dikunjungi ke halaman pemanggilnya.
 
-Gantilah 3 warna pada langkah 5 dengan warna favorit Anda!
+2. Gantilah 3 warna pada langkah 5 dengan warna favorit Anda!
 ``` dart
 ElevatedButton(
   child: const Text('Red'),
@@ -883,14 +921,18 @@ home: const NavigationDialogScreen(),
 **Langkah 6**
 
 Coba ganti warna background dengan widget dialog tersebut. Jika terjadi error, silakan diperbaiki. Jika berhasil, akan tampil seperti gambar berikut.
+
 Soal 17
-Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+
+1. Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+
 - Saat pengguna menekan salah satu tombol pada dialog, dialog akan ditutup dan mengirimkan nilai warna yang dipilih melalui Navigator.pop(context, color).
 - Nilai tersebut diterima kembali oleh method _showColorDialog() karena pemanggilannya menggunakan await showDialog().
 - Setelah data warna diterima, fungsi setState() dijalankan untuk memperbarui warna latar belakang halaman sesuai pilihan pengguna.
 - Hal ini dimungkinkan karena dialog dapat mengembalikan nilai layaknya proses return data dalam navigasi Flutter.
 
-Gantilah 3 warna pada langkah 3 dengan warna favorit Anda!
+2. Gantilah 3 warna pada langkah 3 dengan warna favorit Anda!
+
 ``` dart
 TextButton(
   child: const Text('Red'),
