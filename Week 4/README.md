@@ -23,6 +23,7 @@ print(list[1]);
 ```
 
 **Langkah 2**
+
 Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan!
 
 Output
@@ -41,6 +42,7 @@ Output
 ```
 
 **Langkah 3**
+
 ``` dart
 void main() {
   final List<String?> list = List<String?>.filled(5, null);
@@ -80,6 +82,7 @@ Output
 
 ## Praktikum 2 : Eksperimen Tipe Data Set
 **Langkah 1**
+
 ``` dart
 void main() {
   var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
@@ -88,6 +91,7 @@ void main() {
 ```
 
 **Langkah 2**
+
 Output
 
 ![](img/image3.png)
@@ -104,6 +108,7 @@ print(halogens);
 Fungsi print akan menampilkan isi Set tersebut.
 
 **Langkah 3**
+
 ``` dart
 var names1 = <String>{};
 Set<String> names2 = {}; 
@@ -156,6 +161,7 @@ Perbedaan :
 
 ## Praktikum 3 : Eksperimen Tipe Data Maps
 **Langkah 1**
+
 ``` dart
 void main() {
   var gifts = {
@@ -175,7 +181,9 @@ void main() {
   print(nobleGases);
 }
 ```
+
 **Langkah 2**
+
 ``` dart
 void main() {
   var gifts = {
@@ -226,6 +234,7 @@ Setelah diperbaiki:
 - nobleGases semua valuenya String ('helium', 'neon', 'argon').
 
 **Langkah 3**
+
 ```dart
 void main() {
   var gifts = {
@@ -303,6 +312,7 @@ print('mhs2: $mhs2');
 
 ## Praktikum 4 : Eksperimen Tipe Data List: Spread dan Control-flow Operators
 **Langkah 1**
+
 ``` dart
 void main() {
   var list = [1, 2, 3];
@@ -314,6 +324,7 @@ void main() {
 ``` 
 
 **Langkah 2**
+
 ``` dart
 void main() {
   var list = [1, 2, 3];
@@ -339,6 +350,7 @@ Output
 ![](img/image7.png)
 
 **Langkah 3**
+
 ``` dart
 // kode tambahan
 list1 = [1, 2, null];           // error karena list 1 tidak terdefinisi
@@ -365,6 +377,7 @@ Output
 ![](img/image8.png)
 
 **Langkah 4**
+
 ``` dart
 var nav = ['Home', 'Furniture', 'Plants', if (promoActive) 'Outlet'];
 print(nav);
@@ -389,6 +402,7 @@ Output
 ![](img/image9.png)
 
 **Langkah 5**
+
 ``` dart
 var nav2 = ['Home', 'Furniture', 'Plants', if (login case 'Manager') 'Inventory'];
 print(nav2);
@@ -429,6 +443,7 @@ Output
 ![](img/image10.png)
 
 **Langkah 6**
+
 ``` dart
 var listOfInts = [1, 2, 3];
 var listOfStrings = ['#0', for (var i in listOfInts) '#$i'];
@@ -451,6 +466,7 @@ Manfaat
 
 ## Praktikum 5 : Eksperimen Tipe Data Records
 **Langkah 1**
+
 ``` dart
 void main() {
   var record = ('first', a: 2, b: true, 'last');
@@ -459,6 +475,7 @@ void main() {
 ```
 
 **Langkah 2**
+
 Perbaikan
 ``` dart
 void main() {
@@ -475,6 +492,7 @@ Penjelasan
 Record di Dart digunakan untuk menyimpan beberapa nilai berbeda dalam satu variabel.
 
 **Langkah 3**
+
 ``` dart
 (int, int) tukar((int, int) record) {
   var (a, b) = record;
@@ -495,6 +513,7 @@ Output
 ![](img/image13.png)
 
 **Langkah 4**
+
 ``` dart
 (String, int) mahasiswa;        // Mahasiswa belum diinisialisasi
 print(mahasiswa);
@@ -511,6 +530,7 @@ Output
 ![](img/image14.png)
 
 **Langkah 5**
+
 ``` dart
 void main() {
 
