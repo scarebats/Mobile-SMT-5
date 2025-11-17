@@ -9,9 +9,11 @@
 Selesaikan Praktikum tersebut, lalu dokumentasikan dan push ke repository Anda berupa screenshot hasil pekerjaan beserta penjelasannya di file README.md!
 
 **Langkah 1**
+
 Buatlah sebuah project flutter baru dengan nama flutter_plugin_pubdev. Lalu jadikan repository di GitHub Anda dengan nama flutter_plugin_pubdev.
 
 **Langkah 2**
+
 Tambahkan plugin auto_size_text menggunakan perintah berikut di terminal
 ``` dart
 flutter pub add auto_size_text
@@ -19,6 +21,7 @@ flutter pub add auto_size_text
 Jika berhasil, maka akan tampil nama plugin beserta versinya di file pubspec.yaml pada bagian dependencies.
 
 **Langkah 3**
+
 Buat file baru bernama red_text_widget.dart di dalam folder lib lalu isi kode seperti berikut.
 ``` dart
 import 'package:flutter/material.dart';
@@ -34,6 +37,7 @@ class RedTextWidget extends StatelessWidget {
 ```
 
 **Langkah 4**
+
 Masih di file red_text_widget.dart, untuk menggunakan plugin auto_size_text, ubahlah kode return Container() menjadi seperti berikut.
 ``` dart
 return AutoSizeText(
@@ -66,6 +70,7 @@ class RedTextWidget extends StatelessWidget {
 ```
 
 **Langkah 5**
+
 Tambahkan variabel text dan parameter di constructor seperti berikut.
 ``` dart
 final String text;
@@ -74,6 +79,7 @@ const RedTextWidget({Key? key, required this.text}) : super(key: key);
 ```
 
 **Langkah 6**
+
 Buka file main.dart lalu tambahkan di dalam children: pada class _MyHomePageState
 ``` dart
 Container(
