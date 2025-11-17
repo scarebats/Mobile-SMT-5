@@ -11,11 +11,13 @@
 
 ## Praktikum 1
 **Langkah 1**
+
 Buatlah sebuah project flutter baru dengan nama layout_flutter. Atau sesuaikan style laporan praktikum yang Anda buat.
 
 ![](img/image1.png)
 
 **Langkah 2**
+
 Buka file main.dart lalu ganti dengan kode berikut. Isi nama dan NIM Anda di text title.
 ``` dart
 import 'package:flutter/material.dart';
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
 ![](img/image2.png)
 
 **Langkah 3**
+
 1. Identifikasi Baris dan Kolom
 - Bagian judul (Title section) → dibangun dengan Row berisi 3 elemen:
     - Expanded(Column) → memuat 2 teks:
@@ -82,6 +85,7 @@ class MyApp extends StatelessWidget {
 ![](img/image3.png)
 
 **Langkah 4**
+
 ``` dart
 import 'package:flutter/material.dart';
 
@@ -143,6 +147,7 @@ class MyApp extends StatelessWidget {
 
 ## Praktikum 2
 **Langkah 1**
+
 ``` dart
 Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
@@ -169,6 +174,7 @@ Column _buildButtonColumn(Color color, IconData icon, String label) {
 ![](img/image5.png)
 
 **Langkah 2**
+
 ``` dart
 Widget buttonSection = Row(
   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -181,6 +187,7 @@ Widget buttonSection = Row(
 ```
 
 **Langkah 3**
+
 Tambahkan variabel buttonSection ke dalam body seperti berikut:
 ``` dart
 return MaterialApp(
@@ -203,6 +210,7 @@ return MaterialApp(
 
 ## Praktikum 3
 **Langkah 1**
+
 ``` dart
 Widget textSection = Container(
   padding: const EdgeInsets.all(32),
@@ -219,6 +227,7 @@ Widget textSection = Container(
 ```
 
 **Langkah 2**
+
 Tambahkan widget variabel textSection ke dalam body seperti berikut:
 ``` dart
 return MaterialApp(
@@ -242,6 +251,7 @@ return MaterialApp(
 
 ## Praktikum 4
 **Langkah 1**
+
 Anda dapat mencari gambar di internet yang ingin ditampilkan. Buatlah folder images di root project layout_flutter. Masukkan file gambar tersebut ke folder images, lalu set nama file tersebut ke file pubspec.yaml seperti berikut:
 ``` dart
 flutter:
@@ -257,6 +267,7 @@ flutter:
 ```
 
 **Langkah 2**
+
 Tambahkan aset gambar ke dalam body seperti berikut:
 ``` dart
 return MaterialApp(
@@ -283,6 +294,7 @@ return MaterialApp(
 ```
 
 **Langkah 3**
+
 Pada langkah terakhir ini, atur semua elemen dalam ListView, bukan Column, karena ListView mendukung scroll yang dinamis saat aplikasi dijalankan pada perangkat yang resolusinya lebih kecil.
 ``` dart
 return MaterialApp(
@@ -442,11 +454,13 @@ class MyApp extends StatelessWidget {
 
 ## Praktikum 5
 **Langkah1**
+
 Sebelum melanjutkan praktikum, buatlah sebuah project baru Flutter dengan nama belanja dan susunan folder seperti pada gambar berikut. Penyusunan ini dimaksudkan untuk mengorganisasi kode dan widget yang lebih mudah.
 
 ![](img/image10.png)
 
 **Langkah2**
+
 Buatlah dua buah file dart dengan nama home_page.dart dan item_page.dart pada folder pages. Untuk masing-masing file, deklarasikan class HomePage pada file home_page.dart dan ItemPage pada item_page.dart. Turunkan class dari StatelessWidget. Gambaran potongan kode dapat anda lihat sebagai berikut.
 
 **home_Page**
@@ -497,6 +511,7 @@ class ItemPage extends StatelessWidget {
 ```
 
 **Langkah3**
+
 Setelah kedua halaman telah dibuat dan didefinisikan, bukalah file main.dart. Pada langkah ini anda akan mendefinisikan Route untuk kedua halaman tersebut. Definisi penamaan route harus bersifat unique. Halaman HomePage didefinisikan sebagai /. Dan halaman ItemPage didefinisikan sebagai /item. Untuk mendefinisikan halaman awal, anda dapat menggunakan named argument initialRoute. Gambaran tahapan ini, dapat anda lihat pada potongan kode berikut.
 
 ``` dart
@@ -529,6 +544,7 @@ class MyApp extends StatelessWidget {
 ```
 
 **Langkah4**
+
 Sebelum melakukan perpindahan halaman dari HomePage ke ItemPage, dibutuhkan proses pemodelan data. Pada desain mockup, dibutuhkan dua informasi yaitu nama dan harga. Untuk menangani hal ini, buatlah sebuah file dengan nama item.dart dan letakkan pada folder models. Pada file ini didefinisikan pemodelan data yang dibutuhkan. Ilustrasi kode yang dibutuhkan, dapat anda lihat pada potongan kode berikut.
 
 ``` dart
@@ -541,6 +557,7 @@ class Item {
 ```
 
 **Langkah5**
+
 Pada halaman HomePage terdapat ListView widget. Sumber data ListView diambil dari model List dari object Item. Gambaran kode yang dibutuhkan untuk melakukan definisi model dapat anda lihat sebagai berikut.
 
 ``` dart
@@ -555,11 +572,13 @@ class HomePage extends StatelessWidget {
 ```
 
 **Langkah6**
+
 Untuk menampilkan ListView pada praktikum ini digunakan itemBuilder. Data diambil dari definisi model yang telah dibuat sebelumnya. Untuk menunjukkan batas data satu dan berikutnya digunakan widget Card. Kode yang telah umum pada bagian ini tidak ditampilkan. 
 
 ![](img/image11.png)
 
 **Langkah7**
+
 Item pada ListView saat ini ketika ditekan masih belum memberikan aksi tertentu. Untuk menambahkan aksi pada ListView dapat digunakan widget InkWell atau GestureDetector. Perbedaan utamanya InkWell merupakan material widget yang memberikan efek ketika ditekan. Sedangkan GestureDetector bersifat umum dan bisa juga digunakan untuk gesture lain selain sentuhan. Pada praktikum ini akan digunakan widget InkWell.
 
 Untuk menambahkan sentuhan, letakkan cursor pada widget pembuka Card. Kemudian gunakan shortcut quick fix dari VSCode (Ctrl + . pada Windows atau Cmd + . pada MacOS). Sorot menu wrap with widget... Ubah nilai widget menjadi InkWell serta tambahkan named argument onTap yang berisi fungsi untuk berpindah ke halaman ItemPage. Ilustrasi potongan kode dapat anda lihat pada potongan berikut.
