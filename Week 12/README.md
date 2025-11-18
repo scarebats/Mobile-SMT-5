@@ -627,6 +627,7 @@ subscription2 = stream.listen((event) {
 
 Lakukan run maka akan tampil error seperti gambar berikut.
 
+![](img/image7.png)
 
 Soal 10
 
@@ -639,49 +640,338 @@ Jika ingin satu stream didengarkan oleh banyak listener, stream tersebut harus d
 
 Ketik kode seperti berikut di method initState()
 ``` dart
-
+void initState() {
+  numberStream = NumberStream();
+  numberStreamController = numberStream.controller;
+  Stream stream = numberStreamController.stream.asBroadcastStream();
+  ...
+}
 ```
 
 **Langkah 5 - Edit method build()**
 
 Tambahkan text seperti berikut
 ``` dart
-
+child: Column(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Text(values),
+    ...
 ```
 
 **Langkah 6 - Run**
 
 Tekan button ‘New Random Number' beberapa kali, maka akan tampil teks angka terus bertambah sebanyak dua kali.
 
+![](img/image8.png)
+
 Soal 11
 
 1. Jelaskan mengapa hal itu bisa terjadi ?
 
-
+Setelah stream dikonversi menjadi broadcast memakai asBroadcastStream(), aliran data tersebut bisa didengarkan oleh lebih dari satu listener. Setiap event yang dipancarkan stream kini diterima oleh kedua listener secara bersamaan, sehingga setiap kali angka dikirim, nilainya ditambahkan dua kali ke dalam list values. Akibatnya, teks yang tampil di layar akan bertambah panjang setiap kali tombol ditekan.
 
 2. Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
 
 # Praktikum 6
-**Langkah 1**
-**Langkah 2**
-**Langkah 3**
-**Langkah 4**
-**Langkah 5**
-**Langkah 6**
-**Langkah 7**
-**Langkah 8**
+**Langkah 1 - Buat Project Baru**
+
+Buatlah sebuah project flutter baru dengan nama streambuilder_nama (beri nama panggilan Anda) di folder week-12/src/ repository GitHub Anda.
+
+**Langkah 2 - Buat file baru stream.dart**
+
+Ketik kode ini
+``` dart
+class NumberStream {
+
+}
+```
+
+**Langkah 3 - Tetap di file stream.dart**
+
+Ketik kode seperti berikut.
+``` dart
+import 'dart:math';
+
+class NumberStream {
+  Stream<int> getNumbers() async* {
+    yield* Stream.periodic(const Duration(seconds: 1), (int t) {
+      Random random = Random();
+      int myNum = random.nextInt(10);
+      return myNum;
+    });
+  }
+}
+```
+
+**Langkah 4 - Edit main.dart**
+
+Ketik kode seperti berikut ini.
+``` dart
+import 'package:flutter/material.dart';
+import 'stream.dart';
+import 'dart:async';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Stream - Naufal',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      home: const StreamHomePage(),
+    );
+  }
+}
+
+class StreamHomePage extends StatefulWidget {
+  const StreamHomePage({super.key});
+
+  @override
+  State<StreamHomePage> createState() => _StreamHomePageState();
+}
+
+class _StreamHomePageState extends State<StreamHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Stream - Naufal'),
+      ),
+      body: Container(
+        
+      ),
+    );
+  }
+}
+```
+
+**Langkah 5 - Tambah variabel**
+
+Di dalam class _StreamHomePageState, ketika variabel ini.
+``` dart
+late Stream<int> numberStream;
+```
+
+**Langkah 6 - Edit initState()**
+
+Ketik kode seperti berikut.
+``` dart
+@override
+void initState() {
+  numberStream = NumberStream().getNumbers();
+  super.initState();
+}
+```
+
+**Langkah 7 - Edit method build()**
+
+``` dart
+body: StreamBuilder(
+  stream: numberStream,
+  initialData: 0,
+  builder: (context, snapshot) {
+    if (snapshot.hasError) {
+      print('Error!');
+    }
+    if (snapshot.hasData) {
+      return Center(
+        child: Text(
+          snapshot.data.toString(),
+          style: const TextStyle(fontSize: 96),
+        )
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  },
+),
+```
+
+**Langkah 8 - Run**
+
+Hasilnya, setiap detik akan tampil angka baru seperti berikut.
+
+![](img/image9.png)
+
+Soal 12
+
+1. Jelaskan maksud kode pada langkah 3 dan 7 !
+
+- Langkah 3
+
+Fungsi getNumbers() menghasilkan sebuah stream yang memproduksi angka acak setiap satu detik melalui Stream.periodic. Setiap kali interval waktu tercapai, dibuat objek Random() untuk memilih angka antara 0 sampai 9. Dengan menggunakan yield*, seluruh event dari stream periodic tersebut diteruskan apa adanya. Hasil akhirnya adalah sebuah stream yang mengirim angka secara terus-menerus dalam interval waktu tertentu.
+
+- Langkah 7
+
+StreamBuilder digunakan untuk memantau aliran data dan memperbarui tampilan setiap kali ada event baru. Parameter initialData memberikan nilai awal sebelum stream memancarkan data pertama. Nilai terbaru dari stream diakses melalui snapshot.data, dan jika terjadi error, snapshot akan menandainya sehingga UI tetap stabil dan tidak crash. Dengan begitu, angka di layar otomatis berubah mengikuti data yang dikirim oleh stream.
+
+2. Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
 
 # Praktikum 7
-**Langkah 1**
-**Langkah 2**
-**Langkah 3**
-**Langkah 4**
-**Langkah 5**
-**Langkah 6**
-**Langkah 7**
-**Langkah 8**
-**Langkah 9**
-**Langkah 10**
-**Langkah 11**
-**Langkah 12**
-**Langkah 13**
+**Langkah 1 - Buat Project baru**
+
+Buatlah sebuah project flutter baru dengan nama bloc_random_nama (beri nama panggilan Anda) di folder week-12/src/ repository GitHub Anda. Lalu buat file baru di folder lib dengan nama random_bloc.dart
+
+**Langkah 2 - Isi kode random_bloc.dart**
+
+Ketik kode impor berikut ini.
+``` dart
+import 'dart:async';
+import 'dart:math';
+```
+
+**Langkah 3 - Buat class RandomNumberBloc()**
+
+``` dart
+class RandomNumberBloc {
+
+}
+```
+
+**Langkah 4 - Buat variabel StreamController**
+
+Di dalam class RandomNumberBloc() ketik variabel berikut ini
+``` dart
+// StreamController for input events
+final _generateRandomController = StreamController<void>();
+// StreamController for output
+final _randomNumberController = StreamController<int>();
+
+// Input Sink
+Sink<void> get generateRandom => _generateRandomController.sink;
+// Output Stream.
+Stream<int> get randomNumber => _randomNumberController.stream;
+
+_secondsStreamController.sink;
+```
+
+**Langkah 5 - Buat constructor**
+
+``` dart
+RandomNumberBloc() {
+  _generateRandomController.stream.listen((_) {
+    final random = Random().nextInt(10);
+    _randomNumberController.sink.add(random);
+  });
+}
+```
+
+**Langkah 6 - Buat method dispose()**
+
+``` dart
+void dispose() {
+  _generateRandomController.close();
+  _randomNumberController.close();
+}
+```
+
+**Langkah 7 - Edit main.dart**
+
+``` dart
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo - Naufal',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const RandomScreen(),
+    );
+  }
+}
+```
+
+**Langkah 8 - Buat file baru random_screen.dart**
+
+Di dalam folder lib project Anda, buatlah file baru ini.
+
+**Langkah 9 - Lakukan impor material dan random_bloc.dart**
+
+Ketik kode ini di file baru random_screen.dart
+``` dart
+import 'package:flutter/material.dart';
+import 'random_bloc.dart';
+```
+
+**Langkah 10 - Buat StatefulWidget RandomScreen**
+
+Buatlah di dalam file random_screen.dart
+
+**Langkah 11 - Buat variabel**
+
+Ketik kode ini di dalam class _RandomScreenState
+``` dart
+final _bloc = RandomNumberBloc();
+```
+
+**Langkah 12 - Buat method dispose()**
+
+Ketik kode ini di dalam class _StreamHomePageState
+``` dart
+@override
+void dispose() {
+  _bloc.dispose();
+  super.dispose();
+}
+```
+
+**Langkah 13 - Edit method build()**
+
+Ketik kode ini di dalam class _StreamHomePageState
+``` dart
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('Random Number')),
+    body: Center(
+      child: StreamBuilder<int>(
+        stream: _bloc.randomNumber,
+        initialData: 0,
+        builder: (context, snapshot) {
+          return Text(
+            'Random Number: ${snapshot.data}',
+            style: const TextStyle(fontSize: 24),
+          );
+        },
+      ),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () => _bloc.generateRandom.add(null),
+      child: const Icon(Icons.refresh),
+    ),
+  );
+}
+```
+
+Run aplikasi, maka Anda akan melihat angka acak antara angka 0 sampai 9 setiap kali menekan tombol FloactingActionButton.
+
+Soal 13
+
+1. Jelaskan maksud praktikum ini ! Dimanakah letak konsep pola BLoC-nya ?
+
+Praktikum ini bertujuan memahami cara kerja pola BLoC (Business Logic Component), yaitu memisahkan logika pemrosesan dari bagian tampilan. Proses pembuatan angka acak tidak lagi ditangani langsung oleh UI, tetapi dipusatkan dalam class RandomNumberBloc. UI hanya mengirim perintah melalui input sink (generateRandom) dan menerima hasil pemrosesan lewat output stream (randomNumber), yang kemudian ditampilkan melalui StreamBuilder.
+
+Penerapan pola BLoC terlihat melalui tiga elemen utama:
+
+1. Input Sink, yang berfungsi menerima aksi atau perintah dari pengguna lewat UI.
+2. Business Logic, yaitu proses dalam constructor BLoC yang menangani event dan menghasilkan angka acak.
+3. Output Stream, yang mengirimkan hasil pengolahan kembali ke UI sehingga dapat dirender.
+
+Dengan pola ini, tampilan tetap sederhana karena hanya bertugas menampilkan data, sementara seluruh proses dihitung dan diatur oleh BLoC.
+
+2. Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+![](img/image10.png)
