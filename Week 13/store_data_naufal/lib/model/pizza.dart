@@ -18,10 +18,10 @@ class Pizza {
     required this.price,
     required this.imageUrl,
   });
-
+  
   factory Pizza.fromJson(Map<String, dynamic> json) {
     return Pizza(
-      id: int.tryParse(json[keyId].toString()) ?? 0,
+      id: int.tryParse(json['id'].toString()) ?? 0,
       pizzaName: json[keyName] != null ? json[keyName].toString() : 'No name',
       description: json[keyDescription] != null
           ? json[keyDescription].toString()
