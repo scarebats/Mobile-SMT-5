@@ -894,7 +894,12 @@ Hubungkan method read ke tombol Read Value, perbarui myPass dan UI melalui setSt
 
 Jalankan aplikasi. Masukkan teks, simpan, lalu baca kembali. Teks tersebut seharusnya ditampilkan, menandakan data telah disimpan dan diambil dengan aman.
 
-![](img/image12.png)
+<p align="center">
+  <img src="img/image9.png" width="45%"/>
+  <img src="img/image12.png" width="45%"/>
+</p>
+
+Jika menampilkan lewat crome maka akan kosong sebaiknya jalankan di android/ios/emulator
 
 Soal 9
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
