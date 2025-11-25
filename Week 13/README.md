@@ -284,10 +284,47 @@ Jalankan aplikasi. Sekarang, Anda akan melihat data pizza ditampilkan dalam daft
 
 ![](img/image2.png)
 
+Soal 3
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+
 **Langkah 23: Tambahkan Method toJson() (Serialization)**
+
+Di file pizza.dart, tambahkan method toJson() ke class Pizza. Method ini berfungsi untuk mengonversi objek Dart kembali menjadi Map (langkah pertama menuju JSON String).
+``` dart
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'pizzaName': pizzaName,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+    };
+  }
+```
+
 **Langkah 24: Buat Fungsi Konversi JSON String**
+
+Di main.dart, tambahkan fungsi convertToJSON di dalam _MyHomePageState untuk menggunakan jsonEncode (dari dart:convert) yang mengubah List objek Dart menjadi JSON String.
+``` dart
+  String convertToJSON(List<Pizza> pizzas) {
+    return jsonEncode(pizzas.map((pizza) => pizza.toJson()).toList());
+  }
+```
+
 **Langkah 25: Tampilkan Output JSON di Konsol**
+
+Di method readJsonFile(), tambahkan kode untuk memanggil convertToJSON dan mencetak hasilnya ke Debug Console sebelum mengembalikan myPizzas.
+``` dart
+String json = convertToJSON(myPizzas);
+print(json);
+return myPizzas;
+```
+
 **Langkah 26: Cek Output Konsol**
+
+Jalankan aplikasi. Periksa Debug Console untuk melihat List objek Pizza telah berhasil dikonversi kembali menjadi JSON String.
+
+![](img/image3.png)
 
 # Praktikum 2: Handle kompatibilitas data JSON
 **Langkah 1: Simulasikan Error**
