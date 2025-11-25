@@ -1,0 +1,352 @@
+# PEMROGRAMAN DART - WEEK 13 - PRAKTIKUM
+
+**Nama  :** Ahmad Naufal Ilham  
+**NIM   :** 2341720047  
+**Absen :** 04 
+
+# Praktikum 1: Konversi Dart model ke JSON
+**Langkah 1: Buat Project Baru**
+
+Buatlah sebuah project flutter baru dengan nama store_data_nama (beri nama panggilan Anda) di folder week-13/src/ repository GitHub Anda.
+
+**Langkah 2: Buka file main.dart**
+
+Ketiklah kode seperti berikut ini.
+``` dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter JSON Demo - Naufal',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('JSON - Naufal'),
+      ),
+      body: Container(),
+    );
+  }
+}
+```
+
+Soal 1
+- Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
+- Gantilah warna tema aplikasi sesuai kesukaan Anda.
+- Lakukan commit hasil jawaban Soal 1 dengan pesan "W13: Jawaban Soal 1"
+
+**Langkah 3: Buat folder baru assets**
+
+Buat folder baru assets di root project Anda
+
+**Langkah 4: Buat file baru pizzalist.json**
+
+Letakkan file ini di dalam folder assets, lalu salin data JSON berikut ke file tersebut.
+``` dart
+[ 
+    { 
+      "id": 1, 
+      "pizzaName": "Margherita", 
+      "description": "Pizza with tomato, fresh mozzarella and basil",
+      "price": 8.75, 
+      "imageUrl": "images/margherita.png" 
+    }, 
+    { 
+      "id": 2, 
+      "pizzaName": "Marinara", 
+      "description": "Pizza with tomato, garlic and oregano",
+      "price": 7.50, 
+      "imageUrl": "images/marinara.png"  
+    }, 
+    { 
+      "id": 3, 
+      "pizzaName": "Napoli", 
+      "description": "Pizza with tomato, garlic and anchovies",
+      "price": 9.50, 
+      "imageUrl": "images/marinara.png"  
+    }, 
+    { 
+      "id": 4, 
+      "pizzaName": "Carciofi", 
+      "description": "Pizza with tomato, fresh mozzarella and artichokes",
+      "price": 8.80, 
+      "imageUrl": "images/marinara.png"  
+    }, 
+    { 
+      "id": 5, 
+      "pizzaName": "Bufala", 
+      "description": "Pizza with tomato, buffalo mozzarella and basil",
+      "price": 12.50, 
+      "imageUrl": "images/marinara.png"  
+    }
+]
+```
+
+**Langkah 5: Edit pubspec.yaml**
+
+Tambahkan referensi folder assets ke file pubspec.yaml seperti berikut ini.
+``` dart
+assets:
+    - assets/
+```
+
+**Langkah 6: Edit maint.dart**
+
+Buatlah variabel seperti berikut ini class _MyHomePageState.
+``` dart
+  String pizzaString = '';
+```
+
+**Langkah 7: Tetap di main.dart**
+
+Untuk membaca isi dari file pizzalist.json di dalam class _MyHomePageState, tambahkan method readJsonFile seperti kode berikut untuk membaca file json.
+``` dart
+  Future readJsonFile() async {
+    String myString = await DefaultAssetBundle.of(context)
+        .loadString('assets/pizzalist.json');
+
+    setState(() {
+      pizzaString = myString;
+    });
+  }
+```
+
+**Langkah 8: Panggil method readJsonFile**
+
+Panggil method readJsonFile di initState
+``` dart
+@override
+void initState() {
+    super.initState();
+    readJsonFile();
+}
+```
+
+**Langkah 9: Tampilkan hasil JSON**
+
+Kemudian tampilkan hasil JSON di body scaffold.
+```dart
+body:Text(pizzaString),
+```
+
+**Langkah 10: Run**
+
+Jika kode sudah benar, seharusnya tampil seperti gambar berikut ini.
+
+![](img/image1.png)
+
+Soal 2
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+
+**Langkah 11: Buat file baru pizza.dart**
+
+Kita ingin mengubah data json tersebut dari String menjadi objek List. Maka perlu membuat file class baru di folder lib/model dengan nama file pizza.dart.
+
+**Langkah 12: Model pizza.dart**
+
+Ketik kode berikut pada file pizza.dart
+``` dart
+class Pizza {
+  final int id;
+  final String pizzaName;
+  final String description;
+  final double price;
+  final String imageUrl;
+}
+```
+
+**Langkah 13: Buat constructor()**
+
+Di dalam class Pizza definisikan constructor fromJson, yang mana akan mengambil data berupa Map sebagai parameter dan mengubah Map ke objek Pizza seperti kode berikut:
+``` dart
+  factory Pizza.fromJson(Map<String, dynamic> json) {
+    return Pizza(
+      id: json['id'] ?? 0,
+      pizzaName: json['pizzaName'] ?? '',
+      description: json['description'] ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      imageUrl: json['imageUrl'] ?? '',
+    );
+  }
+```
+
+**Langkah 14: Pindah ke class _MyHomePageState**
+
+Tambahkan kode jsonDecode seperti berikut.
+``` dart
+  Future<List<Pizza>> readJsonFile() async {
+    String myString = await DefaultAssetBundle.of(context)
+        .loadString('assets/pizzalist.json');
+    List pizzaMapList = jsonDecode(myString);
+```
+
+**Langkah 15: Pastikan impor class**
+
+Perhatikan pada bagian atas file bahwa telah berhasil impor kedua file berikut.
+``` dart
+import 'dart:convert';
+import 'package:store_data_naufal/model/pizza.dart';
+```
+
+Anda telah berhasil mengimpor pustaka yang diperlukan dan melakukan decoding string JSON menjadi List pizzaMapList pada Langkah ini. Selanjutnya, kita akan mengonversi List Map tersebut menjadi List objek Dart (List<Pizza>).
+
+**Langkah 16: Konversi List Map ke List Objek Dart**
+
+Di dalam method readJsonFile(), setelah baris List pizzaMapList = jsonDecode(myString);, tambahkan kode berikut untuk mengonversi setiap Map di pizzaMapList menjadi objek Pizza dan menyimpannya ke myPizzas.
+``` dart
+List<Pizza> myPizzas = [];
+for (var pizza in pizzaMapList) {
+    Pizza myPizza = Pizza.fromJson(pizza);
+    myPizzas.add(myPizza);
+}
+```
+
+**Langkah 17: return myPizzas**
+
+Hapus atau komentari setState yang menampilkan pizzaString dari Langkah 7. Kemudian, kembalikan myPizzas.
+``` dart
+return myPizzas;
+```
+
+**Langkah 18: Perbarui Signature Method**
+
+Perbarui signature method readJsonFile() untuk secara eksplisit menunjukkan bahwa ia mengembalikan Future yang berisi List.
+``` dart
+ Future<List<Pizza>> readJsonFile() async {
+```
+
+**Langkah 19: Deklarasikan Variabel State**
+
+Di dalam class _MyHomePageState, deklarasikan variabel state baru untuk menampung List objek Pizza.
+``` dart
+List<Pizza> myPizzas = [];
+```
+
+**Langkah 20: Panggil di initState dan Perbarui State**
+
+Perbarui method initState() di _MyHomePageState untuk memanggil readJsonFile(). Karena readJsonFile() mengembalikan Future, gunakan .then() untuk mendapatkan hasilnya, dan perbarui state myPizzas.
+``` dart
+  @override
+  void initState() {
+    super.initState();
+    readJsonFile().then((value) {
+      setState(() {
+        myPizzas = value;
+      });
+    });
+  }
+```
+
+**Langkah 21: Tampilkan Data di ListView**
+
+Perbarui body dari Scaffold untuk menggunakan ListView.builder yang menampilkan pizzaName sebagai judul dan description sebagai subjudul dari setiap objek Pizza.
+``` dart
+      body: ListView.builder(
+        itemCount: myPizzas.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(myPizzas[index].pizzaName),
+            subtitle: Text(myPizzas[index].description),
+          );
+        },
+      ),
+    );
+``` 
+
+**Langkah 22: Run**
+
+Jalankan aplikasi. Sekarang, Anda akan melihat data pizza ditampilkan dalam daftar yang lebih terstruktur sebagai objek List Dart.
+
+![](img/image2.png)
+
+**Langkah 23: Tambahkan Method toJson() (Serialization)**
+**Langkah 24: Buat Fungsi Konversi JSON String**
+**Langkah 25: Tampilkan Output JSON di Konsol**
+**Langkah 26: Cek Output Konsol**
+
+# Praktikum 2: Handle kompatibilitas data JSON
+**Langkah 1: Simulasikan Error**
+**Langkah 2: Lihat Error Tipe Data String ke Int**
+**Langkah 3: Terapkan tryParse dan Null Coalescing pada ID**
+**Langkah 4: Simulasikan Error Null pada String**
+**Langkah 5: Terapkan Null Coalescing pada String**
+**Langkah 6: Gunakan toString() untuk Field String**
+**Langkah 7: Simulasikan Error Tipe Data String ke Double**
+**Langkah 8: Terapkan double.tryParse**
+**Langkah 9: Run dan Perhatikan Output Null**
+**Langkah 10: Tambahkan Operator Ternary untuk Output User-Friendly**
+**Langkah 11: Run**
+
+# Praktikum 3: Menangani error JSON
+**Langkah 1: Buka pizza.dart dan Buat Konstanta**
+**Langkah 2: Perbarui fromJson() menggunakan Konstanta**
+**Langkah 3: Perbarui toJson() menggunakan Konstanta**
+**Langkah 4: Run**
+
+# Praktikum 4: SharedPreferences
+**Langkah 1: Tambahkan Dependensi**
+**Langkah 2: Install Dependensi**
+**Langkah 3: Lakukan Import**
+**Langkah 4: Tambahkan Variabel appCounter**
+**Langkah 5: Buat Method readAndWritePreference**
+**Langkah 6: Dapatkan Instance SharedPreferences**
+**Langkah 7: Baca, Cek Null, dan Increment Counter**
+**Langkah 8: Simpan Nilai Baru**
+**Langkah 9: Perbarui State**
+**Langkah 10: Panggil di initState()**
+**Langkah 11: Perbarui Tampilan (body)**
+**Langkah 12: Run**
+
+# Praktikum 5: Akses filesystem dengan path_provider
+**Langkah 1: Tambahkan Dependensi**
+**Langkah 2: Lakukan Import**
+**Langkah 3: Tambahkan Variabel Path State**
+**Langkah 4: Buat Method getPaths()**
+**Langkah 5: Panggil getPaths() di initState()**
+**Langkah 6: Perbarui Tampilan**
+**Langkah 7: Run**
+
+# Praktikum 6: Akses filesystem dengan direktori
+**Langkah 1: Lakukan Import dart:io**
+**Langkah 2: Tambahkan Variabel File dan Text**
+**Langkah 3: Buat Method writeFile()**
+**Langkah 4: Inisialisasi File dan Panggil writeFile() di initState()**
+**Langkah 5: Buat Method readFile()**
+**Langkah 6: Edit build() dan Tambahkan Tombol Baca**
+**Langkah 7: Run**
+
+# Praktikum 7: Menyimpan data dengan enkripsi/dekripsi
+**Langkah 1: Tambahkan Dependensi**
+**Langkah 2: Lakukan Import**
+**Langkah 3: Tambahkan Variabel dan Controller**
+**Langkah 4: Inisialisasi Secure Storage**
+**Langkah 5: Buat Method writeToSecureStorage()**
+**Langkah 6: Buat Method readFromSecureStorage()**
+**Langkah 7: Edit build() untuk UI dan Logic**
+**Langkah 8: Hubungkan Read ke Tombol**
+**Langkah 9: Run**
